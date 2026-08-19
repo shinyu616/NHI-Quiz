@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>健保藥品給付規定學習平台</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section id="start-screen" class="card">
+      <div class="brand">NHI Quiz</div>
+      <h1>健保藥品給付規定學習平台</h1>
+      <p class="subtitle">依「115.7.23 更新」給付規定建立｜第一版：通則</p>
+
+      <label>輸入卡號
+        <input id="card-number" type="text" placeholder="請輸入卡號" autocomplete="off" />
+      </label>
+
+      <label>身分
+        <select id="role">
+          <option value="">請選擇</option>
+          <option>新進藥師</option>
+          <option>PGY</option>
+          <option>實習生</option>
+        </select>
+      </label>
+
+      <label>學習主題
+        <select id="topic">
+          <option value="general">通則</option>
+          <option value="nervous" disabled>神經系統藥物（題庫建置中）</option>
+        </select>
+      </label>
+
+      <button id="start-btn" class="primary">開始測驗</button>
+      <p id="start-error" class="error" aria-live="polite"></p>
+    </section>
+
+    <section id="quiz-screen" class="card hidden">
+      <div class="quiz-topbar">
+        <div>
+          <div id="learner-info" class="muted"></div>
+          <h2 id="topic-title">通則</h2>
+        </div>
+        <div id="progress-text" class="progress-text"></div>
+      </div>
+      <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+
+      <div class="question-block">
+        <div id="question-number" class="question-number"></div>
+        <h3 id="question-text"></h3>
+        <div id="options" class="options"></div>
+      </div>
+
+      <div id="feedback" class="feedback hidden"></div>
+      <button id="next-btn" class="primary hidden">下一題</button>
+    </section>
+
+    <section id="result-screen" class="card hidden">
+      <div class="brand">完成</div>
+      <h2>測驗結果</h2>
+      <div id="result-score" class="score"></div>
+      <p id="result-summary"></p>
+      <div id="submit-status" class="feedback info">目前為本機測試版，成績尚未回傳至 Google Sheet。</div>
+      <div id="review-list" class="review-list"></div>
+      <button id="retry-btn" class="primary">重新測驗</button>
+    </section>
+  </main>
+
+  <script src="js/questions.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
