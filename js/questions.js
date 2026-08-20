@@ -93,5 +93,85 @@ const QUESTION_BANK = {
         explanation: "通則列出的條件之一，是使用經衛生福利部許可之伴隨式診斷用體外診斷醫療器材（IVD）檢測。"
       }
     ]
+ 
+  },  nervous: {
+    title: "神經系統藥物",
+    questions: [
+      {
+        q: "Flurbiprofen 40 mg patch 依健保給付規定，每4週最多可處方幾片？",
+        options: ["8片", "12片", "16片", "20片"],
+        answer: 2,
+        explanation: "Flurbiprofen 40 mg patch 每4週限處方16片以內。"
+      },
+      {
+        q: "Ketorolac 注射劑用於手術後中重度急性疼痛時，治療期間最長為多久？",
+        options: ["3天", "5天", "7天", "14天"],
+        answer: 1,
+        explanation: "Ketorolac 注射劑限短期治療，治療期間為5天以內。"
+      },
+      {
+        q: "Tramadol 用於非癌症慢性頑固性疼痛時，給付規定中的疼痛期須超過多久？",
+        options: ["1個月", "3個月", "6個月", "12個月"],
+        answer: 2,
+        explanation: "非癌症慢性頑固性疼痛的疼痛期須超過6個月。"
+      },
+      {
+        q: "Lidocaine 貼片劑用於帶狀疱疹皮膚病灶後神經痛時，每日最大劑量為多少？",
+        options: ["1片", "2片", "3片", "4片"],
+        answer: 2,
+        explanation: "Lidocaine 貼片劑每日最大劑量為3片；日劑量超過2片時需於病歷記載理由。"
+      },
+      {
+        q: "依給付規定，lidocaine 貼片劑不得與下列何者併用？",
+        options: [
+          "Acetaminophen",
+          "Gabapentin 或 pregabalin 口服製劑",
+          "Tramadol",
+          "NSAIDs 外用製劑"
+        ],
+        answer: 1,
+        explanation: "Lidocaine 貼片劑不得與 gabapentin 或 pregabalin 成分口服製劑併用。"
+      },
+      {
+        q: "Pregabalin 用於帶狀疱疹皮膚病灶後神經痛時，每日最大劑量為多少？",
+        options: ["150 mg", "300 mg", "450 mg", "600 mg"],
+        answer: 3,
+        explanation: "Pregabalin 用於帶狀疱疹皮膚病灶後神經痛，每日最大劑量為600 mg。"
+      },
+      {
+        q: "Pregabalin 用於糖尿病併發周邊神經病變之神經疼痛時，每日最大劑量為多少？",
+        options: ["150 mg", "300 mg", "450 mg", "600 mg"],
+        answer: 1,
+        explanation: "Pregabalin 用於糖尿病併發周邊神經病變之神經疼痛，每日最大劑量為300 mg。"
+      },
+      {
+        q: "Duloxetine 用於糖尿病併發周邊神經病變之神經疼痛時，每日最大劑量為多少？",
+        options: ["30 mg", "60 mg", "90 mg", "120 mg"],
+        answer: 1,
+        explanation: "Duloxetine 用於糖尿病併發周邊神經病變之神經疼痛，每日最大劑量為60 mg。"
+      },
+      {
+        q: "Fentanyl citrate 口頰溶片或口頰錠依給付規定，不得用於下列何種疼痛？",
+        options: [
+          "癌症突發性疼痛",
+          "急性或術後疼痛",
+          "已接受類鴉片藥物治療之癌症突發痛",
+          "18歲以上癌症患者之突發性疼痛"
+        ],
+        answer: 1,
+        explanation: "Fentanyl citrate 口頰溶片或口頰錠不得用於急性或術後疼痛之處置。"
+      },
+      {
+        q: "Acetaminophen 80 mg 一般錠劑膠囊劑依健保規定限用於哪一族群？",
+        options: [
+          "3歲以下病人",
+          "6歲以下病人",
+          "12歲以下病人",
+          "18歲以下病人"
+        ],
+        answer: 1,
+        explanation: "Acetaminophen 80 mg 一般錠劑膠囊劑限用於6歲以下病人。"
+      }
+    ]
   }
 };
