@@ -1,6 +1,6 @@
 const $ = (id) => document.getElementById(id);
 const screens = { start: $('start-screen'), quiz: $('quiz-screen'), result: $('result-screen') };
-const RESULTS_ENDPOINT = ''; // 之後貼上 Google Apps Script Web App 網址
+const RESULTS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyrCXiquLsV_rLpAPKzK6u1McsV2wTWKKO2nERcsu9jb4I01TZrz9JRiClpvx0RRCZo/exec'; // 之後貼上 Google Apps Script Web App 網址
 let state = { cardNumber:'', role:'', topic:'general', index:0, score:0, answers:[], locked:false };
 
 function show(name){ Object.entries(screens).forEach(([k,v]) => v.classList.toggle('hidden', k !== name)); }
