@@ -173,5 +173,95 @@ const QUESTION_BANK = {
         explanation: "Acetaminophen 80 mg 一般錠劑膠囊劑限用於6歲以下病人。"
       }
     ]
+  },
+    cardiorenal: {
+    title: "心臟血管及腎臟藥物",
+    questions: [
+      {
+        q: "依健保給付規定，Ticagrelor 用於已發作急性冠心症住院病人，與 Aspirin 合併治療最長可給付多久？",
+        options: ["3個月", "6個月", "9個月", "12個月"],
+        answer: 2,
+        explanation: "Ticagrelor 用於已發作急性冠心症住院病人時，得與 Aspirin 合併治療最長9個月，並需於病歷註明住院時間。"
+      },
+      {
+        q: "依健保給付規定，Prasugrel 用於需接受 PCI 的急性冠心症住院病人，與 Aspirin 合併治療最長可給付多久？",
+        options: ["3個月", "6個月", "9個月", "12個月"],
+        answer: 3,
+        explanation: "Prasugrel 用於需要冠狀動脈介入性治療（PCI）的急性冠心症住院病人，可與 Aspirin 合併治療最長12個月。"
+      },
+      {
+        q: "rt-PA 用於急性缺血性腦中風時，依健保給付規定應於發病後多久內使用？",
+        options: ["3小時", "4.5小時", "6小時", "12小時"],
+        answer: 1,
+        explanation: "rt-PA 用於急性缺血性腦中風，限於發病4.5小時內使用。"
+      },
+      {
+        q: "Apixaban 用於治療深部靜脈血栓或肺栓塞時，第1至7日的給付用法為何？",
+        options: [
+          "每日1次，每次1顆",
+          "每日1次，每次2顆",
+          "每日2次，每次1顆",
+          "每日2次，每次2顆"
+        ],
+        answer: 3,
+        explanation: "Apixaban 治療深部靜脈血栓或肺栓塞，第1至7日每日2次、每次限用2顆；第8日起每日2次、每次限用1顆。"
+      },
+      {
+        q: "下列何者屬於 Edoxaban 用於非瓣膜性心房纖維顫動時的排除標準？",
+        options: [
+          "肌酸酐清除率大於95 mL/min",
+          "肌酸酐清除率大於60 mL/min",
+          "75歲以上",
+          "合併高血壓"
+        ],
+        answer: 0,
+        explanation: "Edoxaban 的排除標準包括肌酸酐清除率小於15 mL/min或大於95 mL/min。"
+      },
+      {
+        q: "Dabigatran 用於治療深部靜脈血栓或肺栓塞時，開始使用前需先接受至少多久的注射型抗凝血劑治療？",
+        options: ["1日", "3日", "5日", "7日"],
+        answer: 2,
+        explanation: "治療深部靜脈血栓或肺栓塞時，需先接受至少5日注射型抗凝血劑治療，再開始使用 Dabigatran。"
+      },
+      {
+        q: "依健保降膽固醇藥物給付規定，ASCVD 極高風險病人的 LDL-C 主要治療目標為何？",
+        options: [
+          "低於100 mg/dL",
+          "低於70 mg/dL",
+          "低於55 mg/dL",
+          "低於40 mg/dL"
+        ],
+        answer: 2,
+        explanation: "ASCVD 極高風險病人的 LDL-C 主要治療目標為低於55 mg/dL。"
+      },
+      {
+        q: "Ivabradine 用於慢性心衰竭時，下列何者符合健保給付的心率條件？",
+        options: [
+          "心房顫動且心跳每分鐘60次以上",
+          "竇性心率且心跳每分鐘75次以上",
+          "竇性心率且心跳每分鐘60次以上",
+          "心房顫動且心跳每分鐘75次以上"
+        ],
+        answer: 1,
+        explanation: "Ivabradine 的給付條件之一為竇性心率，且每分鐘心跳速率須達75次以上。"
+      },
+      {
+        q: "開始使用 Sacubitril/Valsartan 前，若病人原本使用 ACEI，至少需間隔多久？",
+        options: ["12小時", "24小時", "36小時", "48小時"],
+        answer: 2,
+        explanation: "Sacubitril/Valsartan 不應與 ACEI 合併使用，開始使用本藥前至少需與 ACEI 間隔36小時。"
+      },
+      {
+        q: "Dapagliflozin 或 Empagliflozin 用於健保規定之慢性腎臟病時，起始治療的 eGFR 範圍為何？",
+        options: [
+          "15至30 mL/min/1.73m²",
+          "20至45 mL/min/1.73m²",
+          "25至60 mL/min/1.73m²",
+          "30至90 mL/min/1.73m²"
+        ],
+        answer: 2,
+        explanation: "慢性腎臟病起始治療的 eGFR 須為25至60 mL/min/1.73m²，且另有 uACR 等相關給付條件。"
+      }
+    ]
   }
 };
