@@ -18,12 +18,13 @@ button{font-family:inherit;font-size:16px}.primary{margin-top:22px;width:100%;bo
 
 .feedback.info{background:#eef6ff;border:1px solid #b9dafd;color:#24547a;}
 .notice{
-  background:#eef6ff;
-  border:1px solid #cfe3ff;
-  color:#45627f;
-  padding:12px 14px;
+  background:#eaf4ff;
+  border:1px solid #b9d8ff;
+  color:#355b7d;
+  padding:14px 16px;
   border-radius:12px;
   margin:16px 0 22px;
   font-size:14px;
   line-height:1.6;
+  font-weight:500;
 }
