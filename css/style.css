@@ -17,3 +17,13 @@ button{font-family:inherit;font-size:16px}.primary{margin-top:22px;width:100%;bo
 @media(max-width:600px){.app-shell{margin:18px auto}.card{padding:22px 18px;border-radius:18px}.quiz-topbar{display:block}.progress-text{margin-top:8px}.question-block h3{font-size:20px}.score{font-size:44px}}
 
 .feedback.info{background:#eef6ff;border:1px solid #b9dafd;color:#24547a;}
+.notice{
+  background:#eef6ff;
+  border:1px solid #cfe3ff;
+  color:#45627f;
+  padding:12px 14px;
+  border-radius:12px;
+  margin:16px 0 22px;
+  font-size:14px;
+  line-height:1.6;
+}
