@@ -263,5 +263,98 @@ const QUESTION_BANK = {
         explanation: "慢性腎臟病起始治療的 eGFR 須為25至60 mL/min/1.73m²，且另有 uACR 等相關給付條件。"
       }
     ]
+ },    ]
+  },
+
+  metabolic: {
+    title: "代謝及營養劑",
+    questions: [
+      {
+        q: "Fat emulsion 用於重大手術後病人，符合給付規定的情況為何？",
+        options: [
+          "術後3天仍不能經腸道進食",
+          "術後5至7天仍不能經腸道進食",
+          "術後10天仍不能經腸道進食",
+          "所有重大手術後病人皆可使用"
+        ],
+        answer: 1,
+        explanation: "重大手術後5至7天仍不能經腸道進食者，可使用 Fat emulsion，原則上每日不超過一瓶。"
+      },
+      {
+        q: "Sodium glycerophosphate 用於成人時，給付規定最長使用多久？",
+        options: ["3日", "5日", "7日", "14日"],
+        answer: 2,
+        explanation: "Sodium glycerophosphate 用於成人以使用7日為限。"
+      },
+      {
+        q: "下列何者符合 Mecobalamin 製劑的給付條件？",
+        options: [
+          "單純疲勞",
+          "糖尿病併發周邊神經病變並具有臨床神經學病徵",
+          "一般營養補充",
+          "單純失眠"
+        ],
+        answer: 1,
+        explanation: "糖尿病併發周邊神經病變並具有臨床神經學病徵者，可使用 Mecobalamin，且須於處方上敘明。"
+      },
+      {
+        q: "活性 vitamin D3 製劑用於慢性腎臟病引起的低血鈣症時，eGFR 須小於多少？",
+        options: [
+          "15 mL/min/1.73m²",
+          "30 mL/min/1.73m²",
+          "45 mL/min/1.73m²",
+          "60 mL/min/1.73m²"
+        ],
+        answer: 2,
+        explanation: "慢性腎臟病引起之低血鈣症，限 eGFR 小於45 mL/min/1.73m²，或 PTH-i 大於正常值三倍以上等規定條件。"
+      },
+      {
+        q: "HBV（-）及 HCV（-）病患使用肝庇護劑時，GOT 或 GPT 至少須達正常值上限多少倍？",
+        options: ["1倍", "1.5倍", "2倍", "3倍"],
+        answer: 2,
+        explanation: "HBV（-）及 HCV（-）病患，GOT 或 GPT 值須大於等於正常值上限2倍以上。"
+      },
+      {
+        q: "門診使用肝庇護劑，原則上口服可使用幾種？",
+        options: ["一種", "二種", "三種", "不限"],
+        answer: 0,
+        explanation: "肝庇護劑之使用，門診以口服一種為原則。"
+      },
+      {
+        q: "Ketosteril 用於符合條件的慢性腎衰竭病患，每日至多使用幾顆？",
+        options: ["4顆", "6顆", "8顆", "10顆"],
+        answer: 1,
+        explanation: "符合給付條件之慢性腎衰竭病患，每日至多使用6顆。"
+      },
+      {
+        q: "使用 Ketosteril 期間，eGFR 達到多少時應停藥？",
+        options: [
+          "≥15 mL/min/1.73m²",
+          "≥20 mL/min/1.73m²",
+          "≥25 mL/min/1.73m²",
+          "≥30 mL/min/1.73m²"
+        ],
+        answer: 2,
+        explanation: "使用時應每兩個月檢查一次；eGFR ≥25 mL/min/1.73m²時應停藥。"
+      },
+      {
+        q: "下列何者符合 oral calcium salt 的給付對象？",
+        options: [
+          "一般健康成人補鈣",
+          "骨質疏鬆病患",
+          "單純疲勞病患",
+          "一般感冒病患"
+        ],
+        answer: 1,
+        explanation: "Oral calcium salt 可給付於骨質疏鬆或軟骨病等規定病患。"
+      },
+      {
+        q: "Nutrineal PD4 with 1.1% Amino Acid 每天最多使用幾袋？",
+        options: ["1袋", "2袋", "3袋", "4袋"],
+        answer: 0,
+        explanation: "Nutrineal PD4 with 1.1% Amino Acid 每天限使用1袋代替葡萄糖腹膜透析液。"
+      }
+    ]
   }
+};
 };
