@@ -84,7 +84,56 @@ function renderResult(){
 }
 
 $('retry-btn').addEventListener('click', () => { show('start'); });
+$('download-btn').addEventListener('click', downloadResult);
 
+function downloadResult() {
+  const total = QUESTION_BANK[state.topic].questions.length;
+  const pct = Math.round(state.score / total * 100);
+  const topic = QUESTION_BANK[state.topic].title;
+
+  const rows = [
+    ['健保藥品給付規定學習平台'],
+    ['卡號', state.cardNumber],
+    ['身分', state.role],
+    ['學習主題', topic],
+    ['答對題數', state.score],
+    ['總題數', total],
+    ['分數', pct + '分'],
+    ['測驗時間', new Date().toLocaleString('zh-TW')],
+    [],
+    ['題號', '題目', '作答結果']
+  ];
+
+  state.answers.forEach((a, i) => {
+    rows.push([
+      i + 1,
+      a.question,
+      a.correct ? '答對' : '答錯'
+    ]);
+  });
+
+  const csv = rows
+    .map(row => row.map(cell =>
+      `"${String(cell ?? '').replace(/"/g, '""')}"`
+    ).join(','))
+    .join('\n');
+
+  const blob = new Blob(
+    ['\uFEFF' + csv],
+    { type: 'text/csv;charset=utf-8;' }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+
+  link.href = url;
+  link.download = `NHI_Quiz_${state.cardNumber}_${topic}.csv`;
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
 async function submitResult(total, pct){
   const status = $('submit-status');
   if(!RESULTS_ENDPOINT){
