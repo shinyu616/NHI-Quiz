@@ -353,7 +353,6 @@ const QUESTION_BANK = {
         options: ["1袋", "2袋", "3袋", "4袋"],
         answer: 0,
         explanation: "Nutrineal PD4 with 1.1% Amino Acid 每天限使用1袋代替葡萄糖腹膜透析液。"
-      }
     ]
   }
 };
