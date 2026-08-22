@@ -101,16 +101,21 @@ function downloadResult() {
     ['分數', pct + '分'],
     ['測驗時間', new Date().toLocaleString('zh-TW')],
     [],
-    ['題號', '題目', '作答結果']
+   ['題號', '題目', '你的答案', '正確答案', '作答結果', '解析']
   ];
 
   state.answers.forEach((a, i) => {
-    rows.push([
-      i + 1,
-      a.question,
-      a.correct ? '答對' : '答錯'
-    ]);
-  });
+  const question = QUESTION_BANK[state.topic].questions[i];
+
+  rows.push([
+    i + 1,
+    question.q,
+    question.options[a.choice] ?? '',
+    question.options[question.answer] ?? '',
+    a.correct ? '答對' : '答錯',
+    question.explanation ?? ''
+  ]);
+});
 
   const csv = rows
     .map(row => row.map(cell =>
