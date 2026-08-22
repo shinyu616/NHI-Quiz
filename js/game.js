@@ -118,21 +118,18 @@ function downloadResult() {
     ).join(','))
     .join('\n');
 
-  const blob = new Blob(
-    ['\uFEFF' + csv],
-    { type: 'text/csv;charset=utf-8;' }
-  );
+  const dataUrl =
+  'data:text/csv;charset=utf-8,' +
+  encodeURIComponent('\uFEFF' + csv);
 
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
+const link = document.createElement('a');
+link.href = dataUrl;
+link.download = `NHI_Quiz_${state.cardNumber}_${topic}.csv`;
+link.style.display = 'none';
 
-  link.href = url;
-  link.download = `NHI_Quiz_${state.cardNumber}_${topic}.csv`;
-
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
 }
 async function submitResult(total, pct){
   const status = $('submit-status');
