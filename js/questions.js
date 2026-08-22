@@ -263,8 +263,7 @@ const QUESTION_BANK = {
         explanation: "慢性腎臟病起始治療的 eGFR 須為25至60 mL/min/1.73m²，且另有 uACR 等相關給付條件。"
       }
     ]
- },    ]
-  },
+ },    
 
   metabolic: {
     title: "代謝及營養劑",
