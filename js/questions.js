@@ -587,7 +587,7 @@ hormonal: {
   ]
 },
   respiratory_gi: {
-  title: "呼吸及腸胃道藥物",
+  title: "呼吸道及腸胃藥物",
   questions: [
     {
       q: "依健保給付規定，Trelegy Ellipta 用於 COPD 維持治療時，下列何者符合給付條件？",
