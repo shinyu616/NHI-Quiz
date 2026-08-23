@@ -354,6 +354,122 @@ const QUESTION_BANK = {
         explanation: "Nutrineal PD4 with 1.1% Amino Acid 每天限使用1袋代替葡萄糖腹膜透析液。"
         }
   ]
+  },
+
+  hematological: {
+    title: "血液治療藥物",
+    questions: [
+      {
+        q: "腎臟病病人使用 EPO 時，下列何種情況應暫停使用？",
+        options: [
+          "Hb 超過 9 g/dL",
+          "Hb 超過 10 g/dL",
+          "Hb 超過 11 g/dL",
+          "Hb 超過 12 g/dL"
+        ],
+        answer: 2,
+        explanation: "腎臟病病人使用 EPO 時，Hb 目標為10 g/dL；若 Hb 超過11 g/dL，應暫停使用。治療第6至8週 Hb 上升未達1 g/dL時，也應暫停使用。"
+      },
+      {
+        q: "接受 EPO 治療的血液透析或腹膜透析患者，Hb 原則上多久檢查一次？",
+        options: [
+          "每週一次",
+          "每月一次",
+          "每3個月一次",
+          "每6個月一次"
+        ],
+        answer: 1,
+        explanation: "血液透析及腹膜透析患者每月應檢查一次 Hb；未透析患者至少每3個月檢查一次。"
+      },
+      {
+        q: "短效型 G-CSF 使用期間，病人白血球超過多少時原則上應停藥？",
+        options: [
+          "2,000/cumm",
+          "3,000/cumm",
+          "4,000/cumm",
+          "5,000/cumm"
+        ],
+        answer: 2,
+        explanation: "患者白血球超過4,000/cumm，或中性白血球超過2,000/cumm時，原則上應停藥。"
+      },
+      {
+        q: "長效型 G-CSF（如 pegfilgrastim）在同一化學治療療程內的使用規定為何？",
+        options: [
+          "限用1支，且不可併用短效型 G-CSF",
+          "限用2支，可併用短效型 G-CSF",
+          "使用支數不限",
+          "僅限制總劑量"
+        ],
+        answer: 0,
+        explanation: "長效型 G-CSF 在同一化學治療療程內限用1支，且不可併用短效型注射劑。"
+      },
+      {
+        q: "肝硬化病人有相當腹水或合併水腫，且符合 Human Albumin 給付條件時，每日最多用量為何？",
+        options: [
+          "10 g",
+          "20 g",
+          "25 g",
+          "50 g"
+        ],
+        answer: 2,
+        explanation: "血清 Albumin 低於2.5 g/dL，且為肝硬化合併相當腹水或水腫者，每日最多使用25 g。"
+      },
+      {
+        q: "使用 Human Albumin 時，作為給付依據的血清 Albumin 濃度檢驗日期原則上應為多久內？",
+        options: [
+          "最近24小時",
+          "最近3天",
+          "最近7天",
+          "最近14天"
+        ],
+        answer: 1,
+        explanation: "血清 Albumin 濃度檢驗日期限最近3天以內；如為多次注射，則需為上次注射後最近3天內的結果。"
+      },
+      {
+        q: "Emicizumab 用於 A 型血友病且有抗體病人的預防性治療時，抗體條件為何？",
+        options: [
+          "一次檢測第八凝血因子抑制性抗體 ≥1 BU",
+          "不只一次證實第八凝血因子抑制性抗體 ≥5 BU",
+          "抗體必須低於5 BU",
+          "不需檢測抗體"
+        ],
+        answer: 1,
+        explanation: "須經 Bethesda 分析法不只一次證實帶有第八凝血因子抑制性抗體≥5.0 BU。"
+      },
+      {
+        q: "Emicizumab 皮下注射預防性治療的最初4週負荷劑量為何？",
+        options: [
+          "每週1次，每次1.5 mg/kg",
+          "每週1次，每次3 mg/kg",
+          "每2週1次，每次3 mg/kg",
+          "每4週1次，每次6 mg/kg"
+        ],
+        answer: 1,
+        explanation: "Emicizumab 最初4週每週一次投予3 mg/kg；之後可依規定改為每週1.5 mg/kg、每2週3 mg/kg或每4週6 mg/kg。"
+      },
+      {
+        q: "Deferasirox 用於需長期輸血且已併有鐵質沉積的患者時，血清 Ferritin 須高於多少才符合該項給付條件？",
+        options: [
+          "500 μg/L",
+          "800 μg/L",
+          "1,000 μg/L",
+          "2,000 μg/L"
+        ],
+        answer: 3,
+        explanation: "需長期輸血治療且已併有鐵質沉積的患者，血清 Ferritin＞2,000 μg/L時符合該項使用條件。"
+      },
+      {
+        q: "中型海洋性貧血患者使用 Deferasirox 時，下列何種情況應停藥？",
+        options: [
+          "Ferritin <1,000 μg/L",
+          "Ferritin <800 μg/L",
+          "Ferritin <500 μg/L",
+          "Ferritin <300 μg/L"
+        ],
+        answer: 3,
+        explanation: "中型海洋性貧血患者使用 Deferasirox 時，若肝臟鐵質<3 mg/g dry weight，或血清 Ferritin<300 μg/L，應停藥。"
+      }
+    ]
   }
 };
 
