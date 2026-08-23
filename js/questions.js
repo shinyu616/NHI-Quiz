@@ -585,5 +585,120 @@ hormonal: {
       explanation: "Romosozumab 使用不得超過24支，並須於1年內使用完畢。"
     }
   ]
+},
+  respiratory_gi: {
+  title: "呼吸及腸胃道藥物",
+  questions: [
+    {
+      q: "依健保給付規定，Trelegy Ellipta 用於 COPD 維持治療時，下列何者符合給付條件？",
+      options: [
+        "所有輕度 COPD 病人皆可使用",
+        "已接受 ICS/LABA 或 LABA/LAMA 合併治療，仍有顯著症狀或惡化控制不佳",
+        "僅限急性氣喘發作時使用",
+        "必須與中、高劑量 ICS/LABA 固定複方併用"
+      ],
+      answer: 1,
+      explanation: "Trelegy Ellipta 用於 COPD 維持治療時，病人須符合相關條件，包括已接受 ICS/LABA 或 LABA/LAMA 合併治療，仍有顯著症狀或惡化控制不佳。"
+    },
+    {
+      q: "Trimbow 用於 COPD 維持治療時，依給付規定其肺功能條件為何？",
+      options: [
+        "FEV1 ≥80% predicted",
+        "FEV1 ≥50% predicted",
+        "FEV1 <50% predicted",
+        "不需考慮 FEV1"
+      ],
+      answer: 2,
+      explanation: "Trimbow 用於 COPD 維持治療時，限重度以上，也就是 FEV1 少於預測值50%，且有反覆惡化病史之成人病人。"
+    },
+    {
+      q: "依健保給付規定，Tezepelumab 用於嚴重且控制不良的氣喘時，限用於幾歲以上的成人病人？",
+      options: [
+        "6歲以上",
+        "12歲以上",
+        "18歲以上",
+        "20歲以上"
+      ],
+      answer: 2,
+      explanation: "Tezepelumab 限用於經胸腔專科或過敏免疫專科醫師診斷為嚴重氣喘且控制不良的18歲以上成人病人。"
+    },
+    {
+      q: "嚴重持續性氣喘病人使用 Omalizumab 時，依給付規定 Total IgE 原則上須介於何範圍？",
+      options: [
+        "10–100 IU/mL",
+        "30–1300 IU/mL",
+        "100–2000 IU/mL",
+        "無 IgE 條件"
+      ],
+      answer: 1,
+      explanation: "使用 Omalizumab 須檢附免疫球蛋白 IgE 檢驗結果，Total IgE 原則上須介於30–1300 IU/mL。"
+    },
+    {
+      q: "Nintedanib 與 Pirfenidone 用於特發性肺纖維化時，下列敘述何者正確？",
+      options: [
+        "建議兩者合併使用",
+        "可同時使用，但需減量",
+        "兩者不得同時併用",
+        "僅住院期間不得併用"
+      ],
+      answer: 2,
+      explanation: "依健保給付規定，Nintedanib 與 Pirfenidone 不得同時併用。"
+    },
+    {
+      q: "Mepolizumab 或 Benralizumab 用於嚴重嗜伊紅性氣喘時，投藥前12個月內血中嗜伊紅性白血球須達多少？",
+      options: [
+        "≥100 cells/mcL",
+        "≥200 cells/mcL",
+        "≥300 cells/mcL",
+        "≥500 cells/mcL"
+      ],
+      answer: 2,
+      explanation: "給付條件之一為投藥前12個月內血中嗜伊紅性白血球≥300 cells/mcL。"
+    },
+    {
+      q: "逆流性食道炎符合 Los Angeles Classification Grade A 或 Grade B 時，使用消化性潰瘍用藥的給付期間原則上以多久為限？",
+      options: [
+        "1個月",
+        "2個月",
+        "4個月",
+        "1年"
+      ],
+      answer: 2,
+      explanation: "Grade A 或 Grade B 的逆流性食道炎，使用消化性潰瘍用藥原則上以4個月為限，並須符合相關檢查報告規定。"
+    },
+    {
+      q: "經內視鏡診斷為重度逆流性食道炎，符合 Grade C 或 Grade D，經消化系專科醫師確認後，消化性潰瘍用藥可長期使用多久？",
+      options: [
+        "3個月",
+        "4個月",
+        "6個月",
+        "1年"
+      ],
+      answer: 3,
+      explanation: "Grade C 或 Grade D 的重度逆流性食道炎，經消化系專科醫師確認後，可長期使用消化性潰瘍用藥1年。"
+    },
+    {
+      q: "Aprepitant 口服製劑用於化療相關噁心嘔吐時，依給付規定使用天數為何？",
+      options: [
+        "1天",
+        "2天",
+        "3天",
+        "5天"
+      ],
+      answer: 2,
+      explanation: "Aprepitant 口服製劑限用3天，每日限用1顆。"
+    },
+    {
+      q: "Mesalazine 依健保給付規定主要限用於下列何種疾病？",
+      options: [
+        "胃食道逆流",
+        "消化性潰瘍",
+        "潰瘍性結腸炎、庫隆氏症",
+        "化療引起的噁心嘔吐"
+      ],
+      answer: 2,
+      explanation: "Mesalazine 限潰瘍性結腸炎、庫隆氏症病例使用。"
+    }
+  ]
 }
 };
