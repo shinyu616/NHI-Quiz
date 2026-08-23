@@ -470,6 +470,119 @@ const QUESTION_BANK = {
         explanation: "中型海洋性貧血患者使用 Deferasirox 時，若肝臟鐵質<3 mg/g dry weight，或血清 Ferritin<300 μg/L，應停藥。"
       }
     ]
-  }
-};
-
+  },
+hormonal: {
+  title: "激素及影響內分泌機轉藥物",
+  questions: [
+    {
+      q: "依健保給付規定，第二型糖尿病治療原則上應優先使用下列何種藥物？",
+      options: [
+        "Metformin",
+        "Semaglutide",
+        "Empagliflozin",
+        "Insulin"
+      ],
+      answer: 0,
+      explanation: "第二型糖尿病治療原則上應優先使用 metformin，或考慮早期開始使用 insulin。"
+    },
+    {
+      q: "Semaglutide 用於第二型糖尿病時，依給付規定，患者在接受最大耐受劑量 metformin 及/或 sulfonylurea，並合併其他指定藥物持續6個月後，HbA1c 仍須高於多少？",
+      options: [
+        "7.0%",
+        "7.5%",
+        "8.0%",
+        "8.5%"
+      ],
+      answer: 3,
+      explanation: "Semaglutide 等該類藥品限用於符合前述治療條件持續6個月後，HbA1c仍高於8.5%的第二型糖尿病患者。"
+    },
+    {
+      q: "依給付規定，Semaglutide 不得與下列何種藥物併用？",
+      options: [
+        "Metformin",
+        "Sulfonylurea",
+        "DPP-4抑制劑或 SGLT-2抑制劑",
+        "基礎 Insulin"
+      ],
+      answer: 2,
+      explanation: "該段給付規定指出，Semaglutide 等藥品不得與 DPP-4抑制劑、SGLT-2抑制劑併用。"
+    },
+    {
+      q: "Dapagliflozin 或 Empagliflozin 單方製劑，依給付規定每日最多處方幾粒？",
+      options: [
+        "1粒",
+        "2粒",
+        "3粒",
+        "4粒"
+      ],
+      answer: 0,
+      explanation: "Dapagliflozin、Empagliflozin 等 SGLT-2抑制劑單方製劑每日最多處方1粒。"
+    },
+    {
+      q: "Finasteride 用於前列腺增生且有阻塞症狀時，下列何者符合給付條件？",
+      options: [
+        "前列腺體積大於20 mL",
+        "前列腺體積大於30 mL",
+        "Qmax 大於20 mL/sec",
+        "不需超音波或尿流速評估"
+      ],
+      answer: 1,
+      explanation: "Finasteride 限前列腺增生且有阻塞症狀，前列腺大於30 mL，或最大尿流速 Qmax 小於15 mL/sec 的病人使用。"
+    },
+    {
+      q: "Octreotide injection 使用於胃、食道靜脈曲張出血時，最長使用多久為原則？",
+      options: [
+        "1天",
+        "3天",
+        "5天",
+        "7天"
+      ],
+      answer: 1,
+      explanation: "Octreotide injection 使用於胃、食道靜脈曲張出血，最長以3天為原則。"
+    },
+    {
+      q: "骨質疏鬆症治療期間，依給付規定下列何者正確？",
+      options: [
+        "可同時使用兩種抗骨質再吸收劑",
+        "可同時使用 Denosumab 與 Bisphosphonate",
+        "一次限用一項骨質疏鬆症治療藥物",
+        "可依病人需求任意併用"
+      ],
+      answer: 2,
+      explanation: "骨質疏鬆症治療時，一次限用一項藥物，不得併用其他骨質疏鬆症治療藥物。"
+    },
+    {
+      q: "使用 Bisphosphonate 治療骨質疏鬆症前，依給付規定應先檢測何項數值？",
+      options: [
+        "AST",
+        "HbA1c",
+        "Serum creatinine",
+        "TSH"
+      ],
+      answer: 2,
+      explanation: "使用 Bisphosphonate 類藥物前，須先檢測病人的 serum creatinine，並符合該藥品仿單建議規定。"
+    },
+    {
+      q: "Teriparatide 依健保給付規定，最多可使用幾支？",
+      options: [
+        "12支",
+        "18支",
+        "24支",
+        "36支"
+      ],
+      answer: 1,
+      explanation: "Teriparatide 使用不得超過18支，並須於2年內使用完畢。"
+    },
+    {
+      q: "Romosozumab 依健保給付規定，最多可使用幾支並於多久內使用完畢？",
+      options: [
+        "12支，1年內",
+        "18支，2年內",
+        "24支，1年內",
+        "24支，2年內"
+      ],
+      answer: 2,
+      explanation: "Romosozumab 使用不得超過24支，並須於1年內使用完畢。"
+    }
+  ]
+}
