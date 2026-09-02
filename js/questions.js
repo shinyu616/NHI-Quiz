@@ -700,5 +700,101 @@ hormonal: {
       explanation: "Mesalazine 限潰瘍性結腸炎、庫隆氏症病例使用。"
     }
   ]
-}
+},
+  immunologic: {
+    title: "免疫製劑",
+    questions: [
+      {
+        q: "依健保給付規定，醫院工作人員使用 Hepatitis B immune globulin 時，應優先符合哪項條件？",
+        options: [
+          "HBsAg（+）、Anti-HBc（+）",
+          "HBsAg（-）、Anti-HBc（-），且傳染者為 HBsAg（+）",
+          "HBsAg（-）、Anti-HBc（+），且傳染者為 HBsAg（-）",
+          "HBsAg（+）、Anti-HBc（-），且傳染者為 HBsAg（-）"
+        ],
+        answer: 1,
+        explanation: "應以 HBsAg（-）、Anti-HBc（-）的醫院工作人員為主，且傳染者須為 HBsAg（+）。"
+      },
+      {
+        q: "接受骨髓或幹細胞移植且符合後天性免疫球蛋白低下症給付條件的病人，使用 IVIG 維持治療時，下列何者正確？",
+        options: [
+          "每2週注射一次，每次0.4 g/kg，不須事前審查",
+          "每4週注射一次，每次0.2 g/kg；須經事前審查，每次申請以3個月、3個療程為限",
+          "每4週注射一次，每次2 g/kg；須經事前審查，每次申請以6個月為限",
+          "每月注射一次，每次1 g/kg，可持續使用一年，不須重新評估"
+        ],
+        answer: 1,
+        explanation: "符合條件者每4週注射一次 IVIG，每次0.2 g/kg；須經事前審查，每次申請以3個月、3個療程為限，並須檢附 IgG 濃度檢查報告。"
+      },
+      {
+        q: "Etanercept 用於活動性多關節幼年型慢性關節炎時，病人年齡須符合何項條件？",
+        options: ["1歲以上", "2歲以上", "4歲以上", "6歲以上"],
+        answer: 2,
+        explanation: "Etanercept 限用於4歲以上具有活動性多關節幼年型慢性關節炎的病人。"
+      },
+      {
+        q: "Tocilizumab 用於符合條件的新型冠狀病毒疾病病人時，其給付劑量為何？",
+        options: [
+          "4 mg/kg，每日靜脈注射一次",
+          "8 mg/kg，單次靜脈注射，最大劑量800 mg",
+          "10 mg/kg，每週靜脈注射一次",
+          "固定劑量800 mg，每日靜脈注射一次"
+        ],
+        answer: 1,
+        explanation: "Tocilizumab 的給付劑量為8 mg/kg，單次靜脈注射，最大劑量800 mg。"
+      },
+      {
+        q: "依健保給付規定，每人每次處方 Tetanus toxoid 最多可申報多少？",
+        options: ["0.1 mL", "0.5 mL", "1 mL", "2 mL"],
+        answer: 1,
+        explanation: "Tetanus toxoid 每人每次處方限申報0.5 mL。"
+      },
+      {
+        q: "原發性腎病症候群病人使用 Cyclosporin 後，四個月內每日尿蛋白量未降低至少多少，視為治療無效並應停藥？",
+        options: ["20%", "30%", "40%", "50%"],
+        answer: 2,
+        explanation: "使用 Cyclosporin 後四個月內，每日尿蛋白量無法降低至少40%，即認定治療無效，應停止使用。"
+      },
+      {
+        q: "成人類風濕性關節炎在何種情況下使用 Leflunomide，符合健保給付規定？",
+        options: [
+          "尚未接受任何藥物治療時",
+          "Methotrexate 治療有效且無副作用時",
+          "Methotrexate 治療無效或無法忍受其副作用時",
+          "僅出現輕微關節疼痛時"
+        ],
+        answer: 2,
+        explanation: "Leflunomide 限用於成人類風濕性關節炎，且須為 Methotrexate 治療無效或無法忍受其副作用時使用。"
+      },
+      {
+        q: "成人類風濕性關節炎使用 Rituximab，給予重複療程時，與前次治療至少需間隔多久？",
+        options: ["4週", "12週", "18週", "24週"],
+        answer: 3,
+        explanation: "Rituximab 重複療程須與前次治療相隔24週以上，並符合 DAS28 相關給藥條件。"
+      },
+      {
+        q: "Baricitinib 用於符合條件的新型冠狀病毒疾病病人時，正確的給付用法為何？",
+        options: [
+          "每日口服2 mg，使用7天",
+          "每日口服4 mg，使用14天或至出院",
+          "每日靜脈注射4 mg，使用14天",
+          "每週口服4 mg，使用4週"
+        ],
+        answer: 1,
+        explanation: "Baricitinib 每日口服4 mg，使用14天或至出院；不給付於懷孕婦女。"
+      },
+      {
+        q: "關於 Mepolizumab 與 Benralizumab 用於 EGPA 的健保給付規定，下列何者正確？",
+        options: [
+          "可同時合併使用",
+          "限用於未滿18歲病人",
+          "兩者僅得擇一使用，耐受不良時才可轉換",
+          "使用24週後固定停藥"
+        ],
+        answer: 2,
+        explanation: "Mepolizumab 或 Benralizumab 僅得擇一使用，只有出現耐受不良時才可轉換；給付對象為符合條件的18歲以上成人病人。"
+      }
+    ]
+  }
+
 };
