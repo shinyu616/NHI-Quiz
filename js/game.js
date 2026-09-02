@@ -98,11 +98,28 @@ function renderMatchingQuestion(){
   left.appendChild(questionCard);
 
   const answerKey = matchState.mode === 'image-name' ? 'name' : matchState.mode === 'drug-dose' ? 'dose' : 'indication';
-  const distractors = shuffle(MATCH_DATA.filter(other => other.id !== item.id))
-    .map(other => other[answerKey])
-    .filter((value, idx, array) => array.indexOf(value) === idx && value !== item[answerKey])
+  const duoPair = {
+    'trajenta-duo': 'jardiance-duo',
+    'jardiance-duo': 'trajenta-duo'
+  };
+  const requiredPair = duoPair[item.id]
+    ? MATCH_DATA.find(other => other.id === duoPair[item.id])
+    : null;
+  const candidates = shuffle(MATCH_DATA.filter(other =>
+    other.id !== item.id && (!requiredPair || other.id !== requiredPair.id)
+  ));
+  const distractorItems = [
+    ...(requiredPair ? [requiredPair] : []),
+    ...candidates
+  ];
+  const distractors = distractorItems
+    .map(other => ({id:other.id, value:other[answerKey]}))
+    .filter((option, idx, array) =>
+      option.value !== item[answerKey] &&
+      array.findIndex(entry => entry.value === option.value) === idx
+    )
     .slice(0, 3);
-  const options = shuffle([{id:item.id, value:item[answerKey]}, ...distractors.map((value, idx) => ({id:`distractor-${idx}`, value}))]);
+  const options = shuffle([{id:item.id, value:item[answerKey]}, ...distractors]);
 
   options.forEach((option, idx) => {
     const button = document.createElement('button');
