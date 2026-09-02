@@ -3,7 +3,7 @@ const screens = { start: $('start-screen'), quiz: $('quiz-screen'), match: $('ma
 // 尚未確認資料接收端前，不自動傳送學員卡號與測驗結果。
 const RESULTS_ENDPOINT = '';
 let state = { cardNumber:'', role:'', topic:'general', index:0, score:0, answers:[], locked:false };
-let matchState = { mode:'', selectedLeft:null, selectedRight:null, matched:0, attempts:0 };
+let matchState = { mode:'', questions:[], index:0, score:0, answered:false };
 
 // 藥品資料與圖片取自使用者提供的「藥品圖檔.docx」。
 const MATCH_DATA = [
@@ -45,68 +45,113 @@ $('learning-mode').addEventListener('change', (event) => {
 });
 
 function startMatching(mode, cardNumber, role){
-  matchState = { mode, selectedLeft:null, selectedRight:null, matched:0, attempts:0 };
+  matchState = {
+    mode,
+    questions: shuffle(MATCH_DATA).slice(0, Math.min(10, MATCH_DATA.length)),
+    index: 0,
+    score: 0,
+    answered: false
+  };
   $('match-learner-info').textContent = `卡號 ${maskCard(cardNumber)}｜${role}`;
-  const titles = {'image-name':'藥品圖片 ↔ 藥品名稱','drug-dose':'藥品名稱 ↔ 劑量','drug-indication':'藥品名稱 ↔ 適應症'};
+  const titles = {'image-name':'藥品圖片辨識','drug-dose':'藥品劑量辨識','drug-indication':'藥品適應症辨識'};
   $('match-title').textContent = titles[mode];
+  $('match-next-btn').classList.add('hidden');
+  show('match');
+  renderMatchingQuestion();
+}
+
+function renderMatchingQuestion(){
+  const item = matchState.questions[matchState.index];
+  const total = matchState.questions.length;
+  matchState.answered = false;
+  $('match-progress').textContent = `${matchState.index + 1} / ${total}`;
   $('match-feedback').className = 'feedback info';
-  $('match-feedback').textContent = '請開始配對。';
-  renderMatching(); show('match');
-}
+  $('match-feedback').textContent = '請選擇正確答案。';
+  $('match-next-btn').classList.add('hidden');
 
-function renderMatching(){
-  const left = MATCH_DATA.map(item => ({ id:item.id, value:item.name, image:item.image, showImage:matchState.mode === 'image-name' }));
-  const rightKey = matchState.mode === 'image-name' ? 'name' : matchState.mode === 'drug-dose' ? 'dose' : 'indication';
-  const right = shuffle(MATCH_DATA.map(item => ({ id:item.id, value:item[rightKey] })));
-  renderMatchColumn('match-left', left, 'left'); renderMatchColumn('match-right', right, 'right'); updateMatchProgress();
-}
+  const left = $('match-left');
+  const right = $('match-right');
+  left.innerHTML = '';
+  right.innerHTML = '';
 
-function renderMatchColumn(containerId, items, side){
-  const container = $(containerId); container.innerHTML = '';
-  items.forEach(item => {
+  const questionCard = document.createElement('div');
+  questionCard.className = 'match-question-card';
+
+  if(matchState.mode === 'image-name'){
+    const prompt = document.createElement('div');
+    prompt.className = 'match-question-label';
+    prompt.textContent = '這是哪一種藥品？';
+    const img = document.createElement('img');
+    img.src = item.image;
+    img.alt = '請辨識此藥品';
+    img.className = 'medicine-photo medicine-photo-large';
+    questionCard.append(prompt, img);
+  } else {
+    const prompt = document.createElement('div');
+    prompt.className = 'match-question-label';
+    prompt.textContent = matchState.mode === 'drug-dose' ? '請選擇正確劑量' : '請選擇正確適應症';
+    const drugName = document.createElement('strong');
+    drugName.className = 'match-drug-name';
+    drugName.textContent = item.name;
+    questionCard.append(prompt, drugName);
+  }
+  left.appendChild(questionCard);
+
+  const answerKey = matchState.mode === 'image-name' ? 'name' : matchState.mode === 'drug-dose' ? 'dose' : 'indication';
+  const distractors = shuffle(MATCH_DATA.filter(other => other.id !== item.id))
+    .map(other => other[answerKey])
+    .filter((value, idx, array) => array.indexOf(value) === idx && value !== item[answerKey])
+    .slice(0, 3);
+  const options = shuffle([{id:item.id, value:item[answerKey]}, ...distractors.map((value, idx) => ({id:`distractor-${idx}`, value}))]);
+
+  options.forEach((option, idx) => {
     const button = document.createElement('button');
-    button.className = `match-card${item.showImage ? ' medicine-photo-card' : ''}`;
-    button.dataset.id = item.id;
-    if(item.showImage){
-      const img = document.createElement('img');
-      img.src = item.image;
-      img.alt = '請辨識此藥品';
-      img.className = 'medicine-photo';
-      img.loading = 'eager';
-      button.appendChild(img);
-    } else {
-      button.textContent = item.value;
-    }
-    button.addEventListener('click', () => selectMatch(button, side));
-    container.appendChild(button);
+    button.className = 'match-card answer-option';
+    button.dataset.correct = option.id === item.id ? 'true' : 'false';
+    button.textContent = `${String.fromCharCode(65 + idx)}. ${option.value}`;
+    button.addEventListener('click', () => chooseMatchingAnswer(button, item[answerKey]));
+    right.appendChild(button);
   });
 }
 
-function selectMatch(button, side){
-  if(button.classList.contains('matched')) return;
-  const key = side === 'left' ? 'selectedLeft' : 'selectedRight';
-  const column = side === 'left' ? $('match-left') : $('match-right');
-  [...column.children].forEach(card => card.classList.remove('selected'));
-  button.classList.add('selected'); matchState[key] = button;
-  if(matchState.selectedLeft && matchState.selectedRight) checkMatch();
+function chooseMatchingAnswer(button, correctAnswer){
+  if(matchState.answered) return;
+  matchState.answered = true;
+  const correct = button.dataset.correct === 'true';
+  if(correct) matchState.score++;
+
+  [...$('match-right').children].forEach(option => {
+    option.disabled = true;
+    if(option.dataset.correct === 'true') option.classList.add('matched');
+  });
+  if(!correct) button.classList.add('mismatch');
+
+  $('match-feedback').className = `feedback ${correct ? 'good' : 'bad'}`;
+  $('match-feedback').textContent = correct ? '答對了！' : `答錯了，正確答案是：${correctAnswer}`;
+  $('match-next-btn').textContent = matchState.index === matchState.questions.length - 1 ? '查看結果' : '下一題';
+  $('match-next-btn').classList.remove('hidden');
 }
 
-function checkMatch(){
-  const left = matchState.selectedLeft, right = matchState.selectedRight;
-  matchState.attempts++;
-  if(left.dataset.id === right.dataset.id){
-    left.classList.add('matched'); right.classList.add('matched'); left.disabled = true; right.disabled = true; matchState.matched++;
-    $('match-feedback').className = 'feedback good';
-    $('match-feedback').textContent = matchState.matched === MATCH_DATA.length ? `全部完成！共嘗試 ${matchState.attempts} 次。` : '配對正確！請繼續。';
+$('match-next-btn').addEventListener('click', () => {
+  if(matchState.index < matchState.questions.length - 1){
+    matchState.index++;
+    renderMatchingQuestion();
   } else {
-    left.classList.add('mismatch'); right.classList.add('mismatch');
-    $('match-feedback').className = 'feedback bad'; $('match-feedback').textContent = '配對不正確，請再試一次。';
-    setTimeout(() => { left.classList.remove('mismatch'); right.classList.remove('mismatch'); }, 450);
+    renderMatchingResult();
   }
-  left.classList.remove('selected'); right.classList.remove('selected'); matchState.selectedLeft = null; matchState.selectedRight = null; updateMatchProgress();
+});
+
+function renderMatchingResult(){
+  const total = matchState.questions.length;
+  $('match-title').textContent = '練習結果';
+  $('match-progress').textContent = `${total} / ${total}`;
+  $('match-left').innerHTML = `<div class="match-result-score"><strong>${matchState.score} / ${total}</strong><span>答對題數</span></div>`;
+  $('match-right').innerHTML = '';
+  $('match-feedback').className = `feedback ${matchState.score >= 8 ? 'good' : 'info'}`;
+  $('match-feedback').textContent = matchState.score >= 8 ? '表現很好！' : '可以返回首頁再練習一次。';
+  $('match-next-btn').classList.add('hidden');
 }
 
-function updateMatchProgress(){ $('match-progress').textContent = `${matchState.matched} / ${MATCH_DATA.length}`; }
 function shuffle(items){
   const copy = [...items];
   for(let i=copy.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [copy[i],copy[j]]=[copy[j],copy[i]]; }
