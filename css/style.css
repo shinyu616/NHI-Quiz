@@ -69,3 +69,79 @@ button{font-family:inherit;font-size:16px}.primary{margin-top:22px;width:100%;bo
   border-radius: 10px;
   background: #fff;
 }
+
+
+.match-question-card {
+  min-height: 260px;
+  padding: 1rem;
+  border: 2px solid #dbeafe;
+  border-radius: 16px;
+  background: #f8fbff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.match-question-label {
+  color: #475569;
+  font-weight: 700;
+  text-align: center;
+}
+
+.match-drug-name {
+  color: #0f3d73;
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+  line-height: 1.45;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.medicine-photo-large {
+  height: 220px;
+  max-width: 100%;
+}
+
+.answer-option {
+  width: 100%;
+  min-height: 58px;
+  height: auto;
+  padding: 0.8rem 1rem;
+  line-height: 1.45;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+.match-result-score {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #0f3d73;
+}
+
+.match-result-score strong {
+  font-size: 3rem;
+}
+
+.match-result-score span {
+  color: #64748b;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .match-board {
+    grid-template-columns: 1fr;
+  }
+
+  .match-question-card {
+    min-height: 220px;
+  }
+
+  .medicine-photo-large {
+    height: 180px;
+  }
+}
