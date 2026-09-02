@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>健保藥品給付規定學習平台</title>
+  <title>藥學互動學習平台</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <main class="app-shell">
     <section id="start-screen" class="card">
-      <div class="brand">NHI Quiz</div>
-      <h1>健保藥品給付規定學習平台</h1>
-      <p class="subtitle">透過主題測驗，熟悉健保藥品給付規定重點</p>
+      <div class="brand">Pharmacy Learning</div>
+      <h1>藥學互動學習平台</h1>
+      <p class="subtitle">透過主題測驗與互動配對，強化藥品知識與實務應用</p>
       <div class="notice">
-  📌 本平台供學習使用，實際給付規定請以最新公告為準。
-</div>
+        ℹ️ 本平台內容僅供學習參考；健保給付規定與藥品資訊，請以最新官方公告及院內規範為準。
+      </div>
 
       <label>輸入卡號
         <input id="card-number" type="text" placeholder="請輸入卡號" autocomplete="off" />
@@ -29,7 +29,17 @@
         </select>
       </label>
 
-      <label>學習主題
+      <label>學習模式
+        <select id="learning-mode">
+          <option value="">請選擇學習模式</option>
+          <option value="quiz">健保藥品給付規定</option>
+          <option value="image-name">藥品圖片 ↔ 藥品名稱</option>
+          <option value="drug-dose">藥品名稱 ↔ 劑量</option>
+          <option value="drug-indication">藥品名稱 ↔ 適應症</option>
+        </select>
+      </label>
+
+      <label id="topic-field" class="hidden">學習主題
        <select id="topic">
 <option value="">請選擇學習主題</option>
 <option value="general">通則</option>
@@ -44,6 +54,18 @@
 
       <button id="start-btn" class="primary">開始測驗</button>
       <p id="start-error" class="error" aria-live="polite"></p>
+    </section>
+
+    <section id="match-screen" class="card hidden">
+      <div class="quiz-topbar">
+        <div><div id="match-learner-info" class="muted"></div><h2 id="match-title">藥品配對挑戰</h2></div>
+        <div id="match-progress" class="progress-text"></div>
+      </div>
+      <div class="notice demo-notice">目前使用示範資料；正式版將替換為院內藥品圖片與資料。</div>
+      <p class="match-help">先點選左側卡片，再點選右側相對應的卡片。</p>
+      <div class="match-board"><div id="match-left" class="match-column"></div><div id="match-right" class="match-column"></div></div>
+      <div id="match-feedback" class="feedback info" aria-live="polite">請開始配對。</div>
+      <button id="match-home-btn" class="secondary">返回首頁</button>
     </section>
 
     <section id="quiz-screen" class="card hidden">
