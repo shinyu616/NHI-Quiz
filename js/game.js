@@ -1,21 +1,100 @@
 const $ = (id) => document.getElementById(id);
-const screens = { start: $('start-screen'), quiz: $('quiz-screen'), result: $('result-screen') };
-const RESULTS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyrCXiquLsV_rLpAPKzK6u1McsV2wTWKKO2nERcsu9jb4I01TZrz9JRiClpvx0RRCZo/exec'; // 之後貼上 Google Apps Script Web App 網址
+const screens = { start: $('start-screen'), quiz: $('quiz-screen'), match: $('match-screen'), result: $('result-screen') };
+// 尚未確認資料接收端前，不自動傳送學員卡號與測驗結果。
+const RESULTS_ENDPOINT = '';
 let state = { cardNumber:'', role:'', topic:'general', index:0, score:0, answers:[], locked:false };
+let matchState = { mode:'', selectedLeft:null, selectedRight:null, matched:0, attempts:0 };
+
+// 功能版示範資料：正式使用前請替換為院內確認過的藥品資料與圖片。
+const MATCH_DATA = [
+  { id:'metformin', name:'Metformin', dose:'500 mg', indication:'第二型糖尿病', imageLabel:'Metformin\n示意圖' },
+  { id:'amlodipine', name:'Amlodipine', dose:'5 mg', indication:'高血壓', imageLabel:'Amlodipine\n示意圖' },
+  { id:'atorvastatin', name:'Atorvastatin', dose:'20 mg', indication:'高膽固醇血症', imageLabel:'Atorvastatin\n示意圖' },
+  { id:'omeprazole', name:'Omeprazole', dose:'20 mg', indication:'胃食道逆流', imageLabel:'Omeprazole\n示意圖' }
+];
 
 function show(name){ Object.entries(screens).forEach(([k,v]) => v.classList.toggle('hidden', k !== name)); }
 
 $('start-btn').addEventListener('click', () => {
   const cardNumber = $('card-number').value.trim();
   const role = $('role').value;
+  const mode = $('learning-mode').value;
   const topic = $('topic').value;
-  if(!cardNumber || !role){ $('start-error').textContent = '請先輸入卡號並選擇身分。'; return; }
+  if(!cardNumber || !role || !mode){ $('start-error').textContent = '請輸入卡號，並選擇身分及學習模式。'; return; }
+  if(mode === 'quiz' && (!topic || !QUESTION_BANK[topic])){ $('start-error').textContent = '請選擇學習主題。'; return; }
   $('start-error').textContent = '';
+  if(mode !== 'quiz'){ startMatching(mode, cardNumber, role); return; }
   state = { cardNumber, role, topic, index:0, score:0, answers:[], locked:false };
   $('learner-info').textContent = `卡號 ${maskCard(cardNumber)}｜${role}`;
   $('topic-title').textContent = QUESTION_BANK[topic].title;
   show('quiz'); renderQuestion();
 });
+
+$('learning-mode').addEventListener('change', (event) => {
+  const isQuiz = event.target.value === 'quiz';
+  $('topic-field').classList.toggle('hidden', !isQuiz);
+  $('start-btn').textContent = isQuiz ? '開始測驗' : '開始配對';
+});
+
+function startMatching(mode, cardNumber, role){
+  matchState = { mode, selectedLeft:null, selectedRight:null, matched:0, attempts:0 };
+  $('match-learner-info').textContent = `卡號 ${maskCard(cardNumber)}｜${role}`;
+  const titles = {'image-name':'藥品圖片 ↔ 藥品名稱','drug-dose':'藥品名稱 ↔ 劑量','drug-indication':'藥品名稱 ↔ 適應症'};
+  $('match-title').textContent = titles[mode];
+  $('match-feedback').className = 'feedback info';
+  $('match-feedback').textContent = '請開始配對。';
+  renderMatching(); show('match');
+}
+
+function renderMatching(){
+  const left = MATCH_DATA.map(item => ({ id:item.id, value:matchState.mode === 'image-name' ? item.imageLabel : item.name, image:matchState.mode === 'image-name' }));
+  const rightKey = matchState.mode === 'image-name' ? 'name' : matchState.mode === 'drug-dose' ? 'dose' : 'indication';
+  const right = shuffle(MATCH_DATA.map(item => ({ id:item.id, value:item[rightKey] })));
+  renderMatchColumn('match-left', left, 'left'); renderMatchColumn('match-right', right, 'right'); updateMatchProgress();
+}
+
+function renderMatchColumn(containerId, items, side){
+  const container = $(containerId); container.innerHTML = '';
+  items.forEach(item => {
+    const button = document.createElement('button');
+    button.className = `match-card${item.image ? ' medicine-placeholder' : ''}`;
+    button.dataset.id = item.id; button.textContent = item.value;
+    button.addEventListener('click', () => selectMatch(button, side));
+    container.appendChild(button);
+  });
+}
+
+function selectMatch(button, side){
+  if(button.classList.contains('matched')) return;
+  const key = side === 'left' ? 'selectedLeft' : 'selectedRight';
+  const column = side === 'left' ? $('match-left') : $('match-right');
+  [...column.children].forEach(card => card.classList.remove('selected'));
+  button.classList.add('selected'); matchState[key] = button;
+  if(matchState.selectedLeft && matchState.selectedRight) checkMatch();
+}
+
+function checkMatch(){
+  const left = matchState.selectedLeft, right = matchState.selectedRight;
+  matchState.attempts++;
+  if(left.dataset.id === right.dataset.id){
+    left.classList.add('matched'); right.classList.add('matched'); left.disabled = true; right.disabled = true; matchState.matched++;
+    $('match-feedback').className = 'feedback good';
+    $('match-feedback').textContent = matchState.matched === MATCH_DATA.length ? `全部完成！共嘗試 ${matchState.attempts} 次。` : '配對正確！請繼續。';
+  } else {
+    left.classList.add('mismatch'); right.classList.add('mismatch');
+    $('match-feedback').className = 'feedback bad'; $('match-feedback').textContent = '配對不正確，請再試一次。';
+    setTimeout(() => { left.classList.remove('mismatch'); right.classList.remove('mismatch'); }, 450);
+  }
+  left.classList.remove('selected'); right.classList.remove('selected'); matchState.selectedLeft = null; matchState.selectedRight = null; updateMatchProgress();
+}
+
+function updateMatchProgress(){ $('match-progress').textContent = `${matchState.matched} / ${MATCH_DATA.length}`; }
+function shuffle(items){
+  const copy = [...items];
+  for(let i=copy.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [copy[i],copy[j]]=[copy[j],copy[i]]; }
+  return copy;
+}
+$('match-home-btn').addEventListener('click', () => show('start'));
 
 function renderQuestion(){
   const bank = QUESTION_BANK[state.topic].questions;
@@ -92,7 +171,7 @@ function downloadResult() {
   const topic = QUESTION_BANK[state.topic].title;
 
   const rows = [
-    ['健保藥品給付規定學習平台'],
+    ['藥學互動學習平台'],
     ['卡號', state.cardNumber],
     ['身分', state.role],
     ['學習主題', topic],
