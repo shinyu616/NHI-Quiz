@@ -5,12 +5,20 @@ const RESULTS_ENDPOINT = '';
 let state = { cardNumber:'', role:'', topic:'general', index:0, score:0, answers:[], locked:false };
 let matchState = { mode:'', selectedLeft:null, selectedRight:null, matched:0, attempts:0 };
 
-// 功能版示範資料：正式使用前請替換為院內確認過的藥品資料與圖片。
+// 藥品資料與圖片取自使用者提供的「藥品圖檔.docx」。
 const MATCH_DATA = [
-  { id:'metformin', name:'Metformin', dose:'500 mg', indication:'第二型糖尿病', imageLabel:'Metformin\n示意圖' },
-  { id:'amlodipine', name:'Amlodipine', dose:'5 mg', indication:'高血壓', imageLabel:'Amlodipine\n示意圖' },
-  { id:'atorvastatin', name:'Atorvastatin', dose:'20 mg', indication:'高膽固醇血症', imageLabel:'Atorvastatin\n示意圖' },
-  { id:'omeprazole', name:'Omeprazole', dose:'20 mg', indication:'胃食道逆流', imageLabel:'Omeprazole\n示意圖' }
+  { id:'metformin', name:'Metformin', dose:'500 mg', indication:'糖尿病', image:'assets/drugs/metformin.jpeg' },
+  { id:'amlodipine', name:'Amlodipine', dose:'5 mg', indication:'高血壓、心絞痛等心血管疾病', image:'assets/drugs/amlodipine.jpeg' },
+  { id:'pentoxifylline', name:'Pentoxifylline', dose:'400 mg', indication:'末稍血管循環障礙', image:'assets/drugs/pentoxifylline.png' },
+  { id:'prednisolone', name:'Prednisolone', dose:'5 mg', indication:'風濕性關節炎、風濕熱、骨關節炎、風濕性脊椎炎、氣喘、過敏性疾病', image:'assets/drugs/prednisolone.jpeg' },
+  { id:'famotidine', name:'Famotidine', dose:'20 mg', indication:'十二指腸潰瘍、胃潰瘍、上消化道出血、逆流性食道炎', image:'assets/drugs/famotidine.png' },
+  { id:'trajenta-duo', name:'Trajenta Duo (Linagliptin + Metformin)', dose:'2.5 mg/850 mg', indication:'第2型糖尿病', image:'assets/drugs/trajenta-duo.jpeg' },
+  { id:'jardiance-duo', name:'Jardiance Duo (Empagliflozin + Metformin)', dose:'12.5 mg/850 mg', indication:'第二型糖尿病', image:'assets/drugs/jardiance-duo.png' },
+  { id:'furosemide', name:'Furosemide', dose:'40 mg', indication:'利尿、高血壓', image:'assets/drugs/furosemide.png' },
+  { id:'imidapril', name:'Imidapril hydrochloride', dose:'10 mg', indication:'高血壓', image:'assets/drugs/imidapril.png' },
+  { id:'rosuvastatin', name:'Rosuvastatin', dose:'10 mg', indication:'高膽固醇血症、高三酸甘油酯血症', image:'assets/drugs/rosuvastatin.png' },
+  { id:'clopidogrel', name:'Clopidogrel', dose:'75 mg', indication:'預防中風、心肌梗塞或週邊動脈等之血管栓塞疾病', image:'assets/drugs/clopidogrel.png' },
+  { id:'metoclopramide', name:'Metoclopramide', dose:'3.84 mg', indication:'預防嘔吐、逆流性消化性食道炎，胃腸蠕動異常', image:'assets/drugs/metoclopramide.png' }
 ];
 
 function show(name){ Object.entries(screens).forEach(([k,v]) => v.classList.toggle('hidden', k !== name)); }
@@ -47,7 +55,7 @@ function startMatching(mode, cardNumber, role){
 }
 
 function renderMatching(){
-  const left = MATCH_DATA.map(item => ({ id:item.id, value:matchState.mode === 'image-name' ? item.imageLabel : item.name, image:matchState.mode === 'image-name' }));
+  const left = MATCH_DATA.map(item => ({ id:item.id, value:item.name, image:item.image, showImage:matchState.mode === 'image-name' }));
   const rightKey = matchState.mode === 'image-name' ? 'name' : matchState.mode === 'drug-dose' ? 'dose' : 'indication';
   const right = shuffle(MATCH_DATA.map(item => ({ id:item.id, value:item[rightKey] })));
   renderMatchColumn('match-left', left, 'left'); renderMatchColumn('match-right', right, 'right'); updateMatchProgress();
@@ -57,8 +65,18 @@ function renderMatchColumn(containerId, items, side){
   const container = $(containerId); container.innerHTML = '';
   items.forEach(item => {
     const button = document.createElement('button');
-    button.className = `match-card${item.image ? ' medicine-placeholder' : ''}`;
-    button.dataset.id = item.id; button.textContent = item.value;
+    button.className = `match-card${item.showImage ? ' medicine-photo-card' : ''}`;
+    button.dataset.id = item.id;
+    if(item.showImage){
+      const img = document.createElement('img');
+      img.src = item.image;
+      img.alt = '請辨識此藥品';
+      img.className = 'medicine-photo';
+      img.loading = 'eager';
+      button.appendChild(img);
+    } else {
+      button.textContent = item.value;
+    }
     button.addEventListener('click', () => selectMatch(button, side));
     container.appendChild(button);
   });
