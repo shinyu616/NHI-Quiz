@@ -33,9 +33,16 @@
         <select id="learning-mode">
           <option value="">請選擇學習模式</option>
           <option value="quiz">健保藥品給付規定</option>
-          <option value="image-name">藥品圖片 ↔ 藥品名稱</option>
-          <option value="drug-dose">藥品名稱 ↔ 劑量</option>
-          <option value="drug-indication">藥品名稱 ↔ 適應症</option>
+          <option value="drug-learning">認識藥品</option>
+        </select>
+      </label>
+
+      <label id="drug-learning-field" class="hidden">認識藥品
+        <select id="drug-learning-mode">
+          <option value="">請選擇練習類型</option>
+          <option value="image-name">藥品辨識</option>
+          <option value="drug-dose">劑量</option>
+          <option value="drug-indication">適應症</option>
         </select>
       </label>
 
@@ -102,6 +109,6 @@
   </main>
 
   <script src="js/questions.js?v=20260903-antimicrobial"></script>
-  <script src="js/game.js?v=20260904-match-results"></script>
+  <script src="js/game.js?v=20260904-drug-learning-menu"></script>
 </body>
 </html>
