@@ -1,7 +1,7 @@
 const $ = (id) => document.getElementById(id);
 const screens = { start: $('start-screen'), quiz: $('quiz-screen'), match: $('match-screen'), result: $('result-screen') };
-// 尚未確認資料接收端前，不自動傳送學員卡號與測驗結果。
-const RESULTS_ENDPOINT = '';
+// Google Apps Script 成績接收端。
+const RESULTS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyrCXiquLsV_rLpAPKzK6u1McsV2wTWKKO2nERcsu9jb4I01TZrz9JRiClpvx0RRCZo/exec';
 let state = { cardNumber:'', role:'', topic:'general', index:0, score:0, answers:[], locked:false };
 let matchState = { mode:'', questions:[], index:0, score:0, answered:false };
 
@@ -312,7 +312,13 @@ async function submitResult(total, pct){
     correct: state.score,
     total,
     completedAt: new Date().toISOString(),
-    wrongQuestions: state.answers.filter(a => !a.correct).map((a,i) => ({ questionNo:i+1, question:a.question }))
+    answers: state.answers.map((answer, index) => ({
+      questionNo: index + 1,
+      question: answer.question,
+      selectedAnswer: answer.options[answer.choice],
+      correctAnswer: answer.options[answer.correctIndex],
+      correct: answer.correct
+    }))
   };
   try {
     await fetch(RESULTS_ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(payload) });
