@@ -26,9 +26,11 @@ function show(name){ Object.entries(screens).forEach(([k,v]) => v.classList.togg
 $('start-btn').addEventListener('click', () => {
   const cardNumber = $('card-number').value.trim();
   const role = $('role').value;
-  const mode = $('learning-mode').value;
+  const learningMode = $('learning-mode').value;
+  const mode = learningMode === 'drug-learning' ? $('drug-learning-mode').value : learningMode;
   const topic = $('topic').value;
-  if(!cardNumber || !role || !mode){ $('start-error').textContent = '請輸入卡號，並選擇身分及學習模式。'; return; }
+  if(!cardNumber || !role || !learningMode){ $('start-error').textContent = '請輸入卡號，並選擇身分及學習模式。'; return; }
+  if(learningMode === 'drug-learning' && !mode){ $('start-error').textContent = '請選擇認識藥品的練習類型。'; return; }
   if(mode === 'quiz' && (!topic || !QUESTION_BANK[topic])){ $('start-error').textContent = '請選擇學習主題。'; return; }
   $('start-error').textContent = '';
   if(mode !== 'quiz'){ startMatching(mode, cardNumber, role); return; }
@@ -40,8 +42,10 @@ $('start-btn').addEventListener('click', () => {
 
 $('learning-mode').addEventListener('change', (event) => {
   const isQuiz = event.target.value === 'quiz';
+  const isDrugLearning = event.target.value === 'drug-learning';
   $('topic-field').classList.toggle('hidden', !isQuiz);
-  $('start-btn').textContent = isQuiz ? '開始測驗' : '開始配對';
+  $('drug-learning-field').classList.toggle('hidden', !isDrugLearning);
+  $('start-btn').textContent = isDrugLearning ? '開始練習' : '開始測驗';
 });
 
 function startMatching(mode, cardNumber, role){
