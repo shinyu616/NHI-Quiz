@@ -3,7 +3,7 @@ const screens = { start: $('start-screen'), quiz: $('quiz-screen'), match: $('ma
 // Google Apps Script 成績接收端。
 const RESULTS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyrCXiquLsV_rLpAPKzK6u1McsV2wTWKKO2nERcsu9jb4I01TZrz9JRiClpvx0RRCZo/exec';
 let state = { cardNumber:'', role:'', topic:'general', index:0, score:0, answers:[], locked:false };
-let matchState = { mode:'', questions:[], index:0, score:0, answered:false };
+let matchState = { mode:'', cardNumber:'', role:'', questions:[], index:0, score:0, answers:[], answered:false };
 
 // 藥品資料與圖片取自使用者提供的「藥品圖檔.docx」。
 const MATCH_DATA = [
@@ -47,9 +47,12 @@ $('learning-mode').addEventListener('change', (event) => {
 function startMatching(mode, cardNumber, role){
   matchState = {
     mode,
+    cardNumber,
+    role,
     questions: shuffle(MATCH_DATA).slice(0, Math.min(10, MATCH_DATA.length)),
     index: 0,
     score: 0,
+    answers: [],
     answered: false
   };
   $('match-learner-info').textContent = `卡號 ${maskCard(cardNumber)}｜${role}`;
@@ -126,16 +129,29 @@ function renderMatchingQuestion(){
     button.className = 'match-card answer-option';
     button.dataset.correct = option.id === item.id ? 'true' : 'false';
     button.textContent = `${String.fromCharCode(65 + idx)}. ${option.value}`;
-    button.addEventListener('click', () => chooseMatchingAnswer(button, item[answerKey]));
+    button.addEventListener('click', () => chooseMatchingAnswer(button, option.value, item[answerKey]));
     right.appendChild(button);
   });
 }
 
-function chooseMatchingAnswer(button, correctAnswer){
+function chooseMatchingAnswer(button, selectedAnswer, correctAnswer){
   if(matchState.answered) return;
   matchState.answered = true;
   const correct = button.dataset.correct === 'true';
   if(correct) matchState.score++;
+
+  const item = matchState.questions[matchState.index];
+  const question = matchState.mode === 'image-name'
+    ? `藥品圖片辨識（${item.image.split('/').pop()}）`
+    : matchState.mode === 'drug-dose'
+      ? `${item.name} 的正確劑量為何？`
+      : `${item.name} 的適應症為何？`;
+  matchState.answers.push({
+    question,
+    selectedAnswer,
+    correctAnswer,
+    correct
+  });
 
   [...$('match-right').children].forEach(option => {
     option.disabled = true;
@@ -160,13 +176,54 @@ $('match-next-btn').addEventListener('click', () => {
 
 function renderMatchingResult(){
   const total = matchState.questions.length;
+  const pct = Math.round(matchState.score / total * 100);
   $('match-title').textContent = '練習結果';
   $('match-progress').textContent = `${total} / ${total}`;
   $('match-left').innerHTML = `<div class="match-result-score"><strong>${matchState.score} / ${total}</strong><span>答對題數</span></div>`;
   $('match-right').innerHTML = '';
   $('match-feedback').className = `feedback ${matchState.score >= 8 ? 'good' : 'info'}`;
-  $('match-feedback').textContent = matchState.score >= 8 ? '表現很好！' : '可以返回首頁再練習一次。';
+  $('match-feedback').textContent = '成績送出中…';
   $('match-next-btn').classList.add('hidden');
+  submitMatchingResult(total, pct);
+}
+
+async function submitMatchingResult(total, pct){
+  const titles = {
+    'image-name':'藥品圖片辨識',
+    'drug-dose':'藥品劑量辨識',
+    'drug-indication':'藥品適應症辨識'
+  };
+  const payload = {
+    cardNumber: matchState.cardNumber,
+    role: matchState.role,
+    topic: titles[matchState.mode],
+    score: pct,
+    correct: matchState.score,
+    total,
+    completedAt: new Date().toISOString(),
+    answers: matchState.answers.map((answer, index) => ({
+      questionNo: index + 1,
+      question: answer.question,
+      selectedAnswer: answer.selectedAnswer,
+      correctAnswer: answer.correctAnswer,
+      correct: answer.correct
+    }))
+  };
+  try {
+    await fetch(RESULTS_ENDPOINT, {
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify(payload)
+    });
+    $('match-feedback').className = 'feedback good';
+    $('match-feedback').textContent = matchState.score >= 8
+      ? '表現很好！成績已送出。'
+      : '成績已送出，可以返回首頁再練習一次。';
+  } catch (err) {
+    $('match-feedback').className = 'feedback bad';
+    $('match-feedback').textContent = '成績送出失敗，請稍後再試。';
+  }
 }
 
 function shuffle(items){
