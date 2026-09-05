@@ -12,7 +12,7 @@ const MATCH_DATA = [
   { id:'pentoxifylline', name:'Pentoxifylline', dose:'400 mg', indication:'末稍血管循環障礙', image:'assets/drugs/pentoxifylline.png' },
   { id:'prednisolone', name:'Prednisolone', dose:'5 mg', indication:'風濕性關節炎、風濕熱、骨關節炎、風濕性脊椎炎、氣喘、過敏性疾病', image:'assets/drugs/prednisolone.jpeg' },
   { id:'famotidine', name:'Famotidine', dose:'20 mg', indication:'十二指腸潰瘍、胃潰瘍、上消化道出血、逆流性食道炎', image:'assets/drugs/famotidine.png' },
-  { id:'trajenta-duo', name:'Trajenta Duo (Linagliptin + Metformin)', dose:'2.5 mg/850 mg', indication:'第2型糖尿病', image:'assets/drugs/trajenta-duo.jpeg' },
+  { id:'trajenta-duo', name:'Trajenta Duo (Linagliptin + Metformin)', dose:'2.5 mg/850 mg', indication:'第二型糖尿病', image:'assets/drugs/trajenta-duo.jpeg' },
   { id:'jardiance-duo', name:'Jardiance Duo (Empagliflozin + Metformin)', dose:'12.5 mg/850 mg', indication:'第二型糖尿病', image:'assets/drugs/jardiance-duo.png' },
   { id:'furosemide', name:'Furosemide', dose:'40 mg', indication:'利尿、高血壓', image:'assets/drugs/furosemide.png' },
   { id:'imidapril', name:'Imidapril hydrochloride', dose:'10 mg', indication:'高血壓', image:'assets/drugs/imidapril.png' },
