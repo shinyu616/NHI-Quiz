@@ -119,12 +119,9 @@ function renderMatchingQuestion(){
     ...(requiredPair ? [requiredPair] : []),
     ...candidates
   ];
-  // 複方糖尿病藥適應症題：統一「第二型」寫法，並避免同義選項重複。
-  const isDiabetesDuoIndication =
-    matchState.mode === 'drug-indication' &&
-    (item.id === 'trajenta-duo' || item.id === 'jardiance-duo');
+  // 適應症選項統一糖尿病名稱，並避免「第二型／第2型」同義選項重複。
   const formatOptionValue = (value) => {
-    if(!isDiabetesDuoIndication) return value;
+    if(matchState.mode !== 'drug-indication') return value;
     if(value === '糖尿病') return '第一型糖尿病';
     if(value === '第2型糖尿病') return '第二型糖尿病';
     return value;
