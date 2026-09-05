@@ -119,21 +119,32 @@ function renderMatchingQuestion(){
     ...(requiredPair ? [requiredPair] : []),
     ...candidates
   ];
+  // 複方糖尿病藥適應症題：統一「第二型」寫法，並避免同義選項重複。
+  const isDiabetesDuoIndication =
+    matchState.mode === 'drug-indication' &&
+    (item.id === 'trajenta-duo' || item.id === 'jardiance-duo');
+  const formatOptionValue = (value) => {
+    if(!isDiabetesDuoIndication) return value;
+    if(value === '糖尿病') return '第一型糖尿病';
+    if(value === '第2型糖尿病') return '第二型糖尿病';
+    return value;
+  };
+  const correctValue = formatOptionValue(item[answerKey]);
   const distractors = distractorItems
-    .map(other => ({id:other.id, value:other[answerKey]}))
+    .map(other => ({id:other.id, value:formatOptionValue(other[answerKey])}))
     .filter((option, idx, array) =>
-      option.value !== item[answerKey] &&
+      option.value !== correctValue &&
       array.findIndex(entry => entry.value === option.value) === idx
     )
     .slice(0, 3);
-  const options = shuffle([{id:item.id, value:item[answerKey]}, ...distractors]);
+  const options = shuffle([{id:item.id, value:correctValue}, ...distractors]);
 
   options.forEach((option, idx) => {
     const button = document.createElement('button');
     button.className = 'match-card answer-option';
     button.dataset.correct = option.id === item.id ? 'true' : 'false';
     button.textContent = `${String.fromCharCode(65 + idx)}. ${option.value}`;
-    button.addEventListener('click', () => chooseMatchingAnswer(button, option.value, item[answerKey]));
+    button.addEventListener('click', () => chooseMatchingAnswer(button, option.value, correctValue));
     right.appendChild(button);
   });
 }
