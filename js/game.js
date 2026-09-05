@@ -7,7 +7,7 @@ let matchState = { mode:'', cardNumber:'', role:'', questions:[], index:0, score
 
 // 藥品資料與圖片取自使用者提供的「藥品圖檔.docx」。
 const MATCH_DATA = [
-  { id:'metformin', name:'Metformin', dose:'500 mg', indication:'糖尿病', image:'assets/drugs/metformin.jpeg' },
+  { id:'metformin', name:'Metformin', dose:'500 mg', indication:'第二型糖尿病', image:'assets/drugs/metformin.jpeg' },
   { id:'amlodipine', name:'Amlodipine', dose:'5 mg', indication:'高血壓、心絞痛等心血管疾病', image:'assets/drugs/amlodipine.jpeg' },
   { id:'pentoxifylline', name:'Pentoxifylline', dose:'400 mg', indication:'末稍血管循環障礙', image:'assets/drugs/pentoxifylline.png' },
   { id:'prednisolone', name:'Prednisolone', dose:'5 mg', indication:'風濕性關節炎、風濕熱、骨關節炎、風濕性脊椎炎、氣喘、過敏性疾病', image:'assets/drugs/prednisolone.jpeg' },
