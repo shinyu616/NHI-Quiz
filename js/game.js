@@ -13,8 +13,8 @@ const MATCH_DATA = [
   { id:'pentoxifylline', name:'Pentoxifylline', dose:'400 mg', indication:'末稍血管循環障礙', image:'assets/drugs/pentoxifylline.png' },
   { id:'prednisolone', name:'Prednisolone', dose:'5 mg', indication:'風濕性關節炎、風濕熱、骨關節炎、風濕性脊椎炎、氣喘、過敏性疾病', image:'assets/drugs/prednisolone.jpeg' },
   { id:'famotidine', name:'Famotidine', dose:'20 mg', indication:'十二指腸潰瘍、胃潰瘍、上消化道出血、逆流性食道炎', image:'assets/drugs/famotidine.png' },
-  { id:'xigduo-xr', name:'Xigduo XR (Dapagliflozin + Metformin)', dose:'10 mg/1000 mg', indication:'第二型糖尿病', image:'assets/drugs/xigduo-xr.jpeg' },
-  { id:'galvus-met', name:'Galvus Met film-coated', dose:'50 mg/850 mg', indication:'第二型糖尿病', image:'assets/drugs/galvus-met.jpeg' },
+  { id:'xigduo-xr', name:'Xigduo XR (Dapagliflozin ＋Metformin )', dose:'10 mg/1000 mg', indication:'第二型糖尿病', image:'assets/drugs/xigduo-xr.jpeg' },
+  { id:'galvus-met', name:'Galvus Metfilm-coated', dose:'50 mg/850 mg', indication:'第二型糖尿病', image:'assets/drugs/galvus-met.jpeg' },
   { id:'exforge', name:'Exforge', dose:'5 mg/80 mg', indication:'高血壓', image:'assets/drugs/exforge.png' },
   { id:'valsartan', name:'Valsartan', dose:'80 mg', indication:'高血壓、心衰竭、心肌梗塞後左心室功能異常', image:'assets/drugs/valsartan.png' },
   { id:'furosemide', name:'Furosemide', dose:'40 mg', indication:'利尿、高血壓', image:'assets/drugs/furosemide.png' },
@@ -126,7 +126,11 @@ function renderMatchingQuestion(){
     return value;
   };
   const correctValue = formatOptionValue(item[answerKey]);
-  const distractors = distractorItems
+  const pairedIds = ['xigduo-xr', 'galvus-met'];
+  const pairedDistractors = matchState.mode === 'image-name'
+    ? MATCH_DATA.filter(other => pairedIds.includes(other.id) && other.id !== item.id)
+    : [];
+  const distractors = [...pairedDistractors, ...distractorItems.filter(other => matchState.mode !== 'image-name' || !pairedIds.includes(other.id))]
     .map(other => ({id:other.id, value:formatOptionValue(other[answerKey])}))
     .filter((option, idx, array) =>
       option.value !== correctValue &&
