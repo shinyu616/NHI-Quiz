@@ -127,7 +127,8 @@ function renderMatchingQuestion(){
   };
   const correctValue = formatOptionValue(item[answerKey]);
   const pairedIds = ['xigduo-xr', 'galvus-met'];
-  const pairedDistractors = matchState.mode === 'image-name'
+  const pairedQuestion = matchState.mode === 'image-name' && pairedIds.includes(item.id);
+  const pairedDistractors = pairedQuestion
     ? MATCH_DATA.filter(other => pairedIds.includes(other.id) && other.id !== item.id)
     : [];
   const distractors = [...pairedDistractors, ...distractorItems.filter(other => matchState.mode !== 'image-name' || !pairedIds.includes(other.id))]
