@@ -5,15 +5,17 @@ const RESULTS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyrCXiquLsV_rL
 let state = { cardNumber:'', role:'', topic:'general', index:0, score:0, answers:[], locked:false };
 let matchState = { mode:'', cardNumber:'', role:'', questions:[], index:0, score:0, answers:[], answered:false };
 
-// 藥品資料與圖片取自使用者提供的「藥品圖檔.docx」。
+// 藥品資料與圖片依使用者提供的藥品圖檔維護。
 const MATCH_DATA = [
   { id:'metformin', name:'Metformin', dose:'500 mg', indication:'第二型糖尿病', image:'assets/drugs/metformin.jpeg' },
   { id:'amlodipine', name:'Amlodipine', dose:'5 mg', indication:'高血壓、心絞痛等心血管疾病', image:'assets/drugs/amlodipine.jpeg' },
   { id:'pentoxifylline', name:'Pentoxifylline', dose:'400 mg', indication:'末稍血管循環障礙', image:'assets/drugs/pentoxifylline.png' },
   { id:'prednisolone', name:'Prednisolone', dose:'5 mg', indication:'風濕性關節炎、風濕熱、骨關節炎、風濕性脊椎炎、氣喘、過敏性疾病', image:'assets/drugs/prednisolone.jpeg' },
   { id:'famotidine', name:'Famotidine', dose:'20 mg', indication:'十二指腸潰瘍、胃潰瘍、上消化道出血、逆流性食道炎', image:'assets/drugs/famotidine.png' },
-  { id:'trajenta-duo', name:'Trajenta Duo (Linagliptin + Metformin)', dose:'2.5 mg/850 mg', indication:'第二型糖尿病', image:'assets/drugs/trajenta-duo.jpeg' },
-  { id:'jardiance-duo', name:'Jardiance Duo (Empagliflozin + Metformin)', dose:'12.5 mg/850 mg', indication:'第二型糖尿病', image:'assets/drugs/jardiance-duo.png' },
+  { id:'xigduo-xr', name:'Xigduo XR (Dapagliflozin + Metformin)', dose:'10 mg/1000 mg', indication:'第二型糖尿病', image:'assets/drugs/xigduo-xr.jpeg' },
+  { id:'galvus-met', name:'Galvus Met film-coated', dose:'50 mg/850 mg', indication:'第二型糖尿病', image:'assets/drugs/galvus-met.jpeg' },
+  { id:'exforge', name:'Exforge', dose:'5 mg/80 mg', indication:'高血壓', image:'assets/drugs/exforge.png' },
+  { id:'valsartan', name:'Valsartan', dose:'80 mg', indication:'高血壓、心衰竭、心肌梗塞後左心室功能異常', image:'assets/drugs/valsartan.png' },
   { id:'furosemide', name:'Furosemide', dose:'40 mg', indication:'利尿、高血壓', image:'assets/drugs/furosemide.png' },
   { id:'imidapril', name:'Imidapril hydrochloride', dose:'10 mg', indication:'高血壓', image:'assets/drugs/imidapril.png' },
   { id:'rosuvastatin', name:'Rosuvastatin', dose:'10 mg', indication:'高膽固醇血症、高三酸甘油酯血症', image:'assets/drugs/rosuvastatin.png' },
@@ -105,20 +107,7 @@ function renderMatchingQuestion(){
   left.appendChild(questionCard);
 
   const answerKey = matchState.mode === 'image-name' ? 'name' : matchState.mode === 'drug-dose' ? 'dose' : 'indication';
-  const duoPair = {
-    'trajenta-duo': 'jardiance-duo',
-    'jardiance-duo': 'trajenta-duo'
-  };
-  const requiredPair = duoPair[item.id]
-    ? MATCH_DATA.find(other => other.id === duoPair[item.id])
-    : null;
-  const candidates = shuffle(MATCH_DATA.filter(other =>
-    other.id !== item.id && (!requiredPair || other.id !== requiredPair.id)
-  ));
-  const distractorItems = [
-    ...(requiredPair ? [requiredPair] : []),
-    ...candidates
-  ];
+  const distractorItems = shuffle(MATCH_DATA.filter(other => other.id !== item.id));
   // 適應症選項統一糖尿病名稱，並避免「第二型／第2型」同義選項重複。
   const formatOptionValue = (value) => {
     if(matchState.mode !== 'drug-indication') return value;
