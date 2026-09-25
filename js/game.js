@@ -1,4 +1,5 @@
 const $ = (id) => document.getElementById(id);
+const drugImageBase = new URL('../assets/drugs/', document.currentScript.src);
 const screens = { start: $('start-screen'), quiz: $('quiz-screen'), match: $('match-screen'), result: $('result-screen') };
 // Google Apps Script 成績接收端。
 const RESULTS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyrCXiquLsV_rLpAPKzK6u1McsV2wTWKKO2nERcsu9jb4I01TZrz9JRiClpvx0RRCZo/exec';
@@ -91,9 +92,13 @@ function renderMatchingQuestion(){
     prompt.className = 'match-question-label';
     prompt.textContent = '這是哪一種藥品？';
     const img = document.createElement('img');
-    img.src = item.image;
+    img.src = new URL(item.image.split('/').pop(), drugImageBase).href;
     img.alt = '請辨識此藥品';
     img.className = 'medicine-photo medicine-photo-large';
+    img.onerror = () => {
+      img.alt = '圖片載入失敗，請重新整理頁面後再試';
+      $('match-feedback').textContent = '藥品圖片載入失敗，請重新整理頁面後再試。';
+    };
     questionCard.append(prompt, img);
   } else {
     const prompt = document.createElement('div');
@@ -107,7 +112,12 @@ function renderMatchingQuestion(){
   left.appendChild(questionCard);
 
   const answerKey = matchState.mode === 'image-name' ? 'name' : matchState.mode === 'drug-dose' ? 'dose' : 'indication';
-  const distractorItems = shuffle(MATCH_DATA.filter(other => other.id !== item.id));
+  // 圖片辨識優先放入相近藥品，選項一律取自目前題庫。
+  const candidates = MATCH_DATA.filter(other => other.id !== item.id);
+  const distractorItems = matchState.mode === 'image-name'
+    ? [...shuffle(candidates.filter(other => other.indication === item.indication)),
+       ...shuffle(candidates.filter(other => other.indication !== item.indication))]
+    : shuffle(candidates);
   // 適應症選項統一糖尿病名稱，並避免「第二型／第2型」同義選項重複。
   const formatOptionValue = (value) => {
     if(matchState.mode !== 'drug-indication') return value;
