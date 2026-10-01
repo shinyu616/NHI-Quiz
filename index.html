@@ -37,12 +37,18 @@
         </select>
       </label>
 
-      <label id="drug-learning-field" class="hidden">認識藥品
+      <label id="drug-learning-field" class="hidden">認識藥品章節
+        <select id="drug-learning-chapter">
+          <option value="">請選擇章節</option>
+          <option value="bare-tablets">1. 裸錠藥品</option>
+          <option value="blister-pack">2. 片裝藥品</option>
+          <option value="same-ingredient">3. 同成分辨識</option>
+        </select>
+      </label>
+
+      <label id="drug-practice-field" class="hidden">練習類型
         <select id="drug-learning-mode">
-          <option value="">請選擇練習類型</option>
-          <option value="image-name">藥品辨識</option>
-          <option value="drug-dose">劑量</option>
-          <option value="drug-indication">適應症</option>
+          <option value="">請先選擇章節</option>
         </select>
       </label>
 
@@ -109,6 +115,6 @@
   </main>
 
   <script src="js/questions.js?v=20260903-antimicrobial"></script>
-  <script src="js/game.js?v=20260925-images-and-options-4"></script>
+  <script src="js/game.js?v=20261001-drug-chapters"></script>
 </body>
 </html>
