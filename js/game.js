@@ -288,6 +288,7 @@ const RARE_BULK_DATA = [
 const DRUG_CHAPTERS = {
   'bare-tablets': { title:'裸錠藥品', groups:{'common-bulk':{title:'常用散裝',data:COMMON_BULK_DATA},'similar-tablets':{title:'相似裸錠',data:SIMILAR_TABLETS_DATA},'rare-bulk':{title:'少用散裝',data:RARE_BULK_DATA}}, modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:[] },
   'blister-pack': { title:'片裝藥品', modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:MATCH_DATA },
+  'coexisting-brands': { title:'併存廠牌', modes:[['image-name','外觀辨識']], data:[] },
   'same-ingredient': { title:'同成分辨識', modes:[['coexisting-form','併存劑型'],['coexisting-dose','併存劑量']], data:[] }
 };
 
