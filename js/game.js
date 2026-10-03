@@ -198,8 +198,95 @@ const SIMILAR_TABLETS_DATA = [
   }
 ];
 
+const RARE_BULK_DATA = [
+  {
+    "id": "rare-acetazolamide",
+    "name": "Acetazolamide",
+    "dose": "250 mg",
+    "indication": "青光眼輔助治療：癲癇、水腫、高山症",
+    "image": "assets/drugs/rare-bulk/acetazolamide.jpeg"
+  },
+  {
+    "id": "rare-griseofulvin",
+    "name": "Griseofulvin",
+    "dose": "125 mg",
+    "indication": "抗黴菌藥",
+    "image": "assets/drugs/rare-bulk/griseofulvin.jpg"
+  },
+  {
+    "id": "rare-haloperidol",
+    "name": "Haloperidol",
+    "dose": "5 mg",
+    "indication": "躁病、噁心、嘔吐、攻擊性與破壞性之行為障礙、舞蹈病。",
+    "image": "assets/drugs/rare-bulk/haloperidol.jpeg"
+  },
+  {
+    "id": "rare-pilocarpine",
+    "name": "Pilocarpine",
+    "dose": "5 mg",
+    "indication": "SJOGREN'S SYNDROME 所引起的口乾燥症。",
+    "image": "assets/drugs/rare-bulk/pilocarpine.jpeg"
+  },
+  {
+    "id": "rare-ergonovine",
+    "name": "Ergonovine",
+    "dose": "0.2 mg",
+    "indication": "子宮收縮異常、子宮異常出血等",
+    "image": "assets/drugs/rare-bulk/ergonovine.jpeg"
+  },
+  {
+    "id": "rare-flavoxate",
+    "name": "Flavoxate",
+    "dose": "200 mg",
+    "indication": "神經性頻尿、慢性前列腺炎、慢性膀胱炎之頻尿、殘尿感",
+    "image": "assets/drugs/rare-bulk/flavoxate.jpeg"
+  },
+  {
+    "id": "rare-pipoxolan",
+    "name": "Pipoxolan",
+    "dose": "10 mg",
+    "indication": "解平滑肌痙攣痙攣所引起的疼痛、特別在腎臟及尿道，偏頭痛型的血管性頭痛",
+    "image": "assets/drugs/rare-bulk/pipoxolan.jpeg"
+  },
+  {
+    "id": "rare-doxycycline",
+    "name": "Doxycycline",
+    "dose": "100 mg",
+    "indication": "細菌感染症革蘭氏陽性菌、陰性菌、立克次氏體及巨型濾過性病毒感染症",
+    "image": "assets/drugs/rare-bulk/doxycycline.jpeg"
+  },
+  {
+    "id": "rare-pyrazinamide",
+    "name": "Pyrazinamide",
+    "dose": "500 mg",
+    "indication": "用於肺部及其他部位之結核症",
+    "image": "assets/drugs/rare-bulk/pyrazinamide.jpeg"
+  },
+  {
+    "id": "rare-pyridoxine",
+    "name": "Pyridoxine",
+    "dose": "50 mg",
+    "indication": "維他命Ｂ６缺乏症妊娠引起之噁心、嘔吐、皮膚炎",
+    "image": "assets/drugs/rare-bulk/pyridoxine.jpeg"
+  },
+  {
+    "id": "rare-sodium-bicarbonate",
+    "name": "Sodium Bicarbonate",
+    "dose": "300 mg",
+    "indication": "代謝性酸中毒之鹼化劑",
+    "image": "assets/drugs/rare-bulk/sodium-bicarbonate.jpeg"
+  },
+  {
+    "id": "rare-vancomycin",
+    "name": "Vancomycin",
+    "dose": "125 mg",
+    "indication": "葡萄球菌感染所致之心內膜炎、骨髓炎、肺炎、敗血病軟組織感染、腸炎、梭狀桿菌感染所致之假膜性結腸炎。",
+    "image": "assets/drugs/rare-bulk/vancomycin.jpg"
+  }
+];
+
 const DRUG_CHAPTERS = {
-  'bare-tablets': { title:'裸錠藥品', groups:{'common-bulk':{title:'常用散裝',data:COMMON_BULK_DATA},'similar-tablets':{title:'相似裸錠',data:SIMILAR_TABLETS_DATA},'rare-bulk':{title:'少用散裝',data:[]}}, modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:[] },
+  'bare-tablets': { title:'裸錠藥品', groups:{'common-bulk':{title:'常用散裝',data:COMMON_BULK_DATA},'similar-tablets':{title:'相似裸錠',data:SIMILAR_TABLETS_DATA},'rare-bulk':{title:'少用散裝',data:RARE_BULK_DATA}}, modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:[] },
   'blister-pack': { title:'片裝藥品', modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:MATCH_DATA },
   'same-ingredient': { title:'同成分辨識', modes:[['coexisting-form','併存劑型'],['coexisting-dose','併存劑量']], data:[] }
 };
