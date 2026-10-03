@@ -24,8 +24,95 @@ const MATCH_DATA = [
   { id:'metoclopramide', name:'Metoclopramide', dose:'3.84 mg', indication:'預防嘔吐、逆流性消化性食道炎，胃腸蠕動異常', image:'assets/drugs/metoclopramide.png' }
 ];
 
+const COMMON_BULK_DATA = [
+  {
+    "id": "common-acetaminophen",
+    "name": "Acetaminophen",
+    "dose": "500 mg",
+    "indication": "退燒止痛",
+    "image": "assets/drugs/common-bulk/acetaminophen.jpg"
+  },
+  {
+    "id": "common-dimethicone",
+    "name": "Dimethicone",
+    "dose": "40 mg",
+    "indication": "腸胃脹氣",
+    "image": "assets/drugs/common-bulk/dimethicone.jpeg"
+  },
+  {
+    "id": "common-magnesium-oxide",
+    "name": "Magnesium Oxide",
+    "dose": "250 mg",
+    "indication": "緩解胃部不適或灼熱感、胃酸過多",
+    "image": "assets/drugs/common-bulk/magnesium-oxide.jpeg"
+  },
+  {
+    "id": "common-mefenamic-acid",
+    "name": "Mefenamic Acid",
+    "dose": "250 mg",
+    "indication": "消炎、止痛、退燒",
+    "image": "assets/drugs/common-bulk/mefenamic-acid.jpeg"
+  },
+  {
+    "id": "common-tranexamic-acid",
+    "name": "Tranexamic Acid",
+    "dose": "250 mg",
+    "indication": "消炎、消腫劑、出血性疾病",
+    "image": "assets/drugs/common-bulk/tranexamic-acid.jpeg"
+  },
+  {
+    "id": "common-dextromethorphan",
+    "name": "Dextromethorphan",
+    "dose": "30 mg",
+    "indication": "鎮咳",
+    "image": "assets/drugs/common-bulk/dextromethorphan.jpeg"
+  },
+  {
+    "id": "common-soma",
+    "name": "SOMA",
+    "dose": "250 mg/150 mg/20 mg/7.7 mg",
+    "indication": "關節、神經肌肉等疼痛之緩解",
+    "image": "assets/drugs/common-bulk/soma.jpeg"
+  },
+  {
+    "id": "common-benzonatate",
+    "name": "Benzonatate",
+    "dose": "100 mg",
+    "indication": "咳嗽",
+    "image": "assets/drugs/common-bulk/benzonatate.jpeg"
+  },
+  {
+    "id": "common-cefixime",
+    "name": "Cefixime",
+    "dose": "100 mg",
+    "indication": "感染症,支氣管炎、慢性呼吸系疾病的繼發性感染、肺炎、腎盂腎炎、膀胱炎、細菌性尿道炎、中耳炎、副鼻竇炎",
+    "image": "assets/drugs/common-bulk/cefixime.jpeg"
+  },
+  {
+    "id": "common-cephalexin",
+    "name": "Cephalexin",
+    "dose": "250 mg",
+    "indication": "抗微生物劑",
+    "image": "assets/drugs/common-bulk/cephalexin.jpeg"
+  },
+  {
+    "id": "common-amoxycillin",
+    "name": "Amoxycillin",
+    "dose": "500 mg",
+    "indication": "葡萄球菌、鏈球菌、肺炎雙球菌、腦膜炎球菌及其他具有感受性細菌",
+    "image": "assets/drugs/common-bulk/amoxycillin.jpeg"
+  },
+  {
+    "id": "common-sennoside",
+    "name": "Sennoside",
+    "dose": "12.5 mg",
+    "indication": "軟便劑",
+    "image": "assets/drugs/common-bulk/sennoside.jpeg"
+  }
+];
+
 const DRUG_CHAPTERS = {
-  'bare-tablets': { title:'裸錠藥品', groups:{'common-bulk':{title:'常用散裝',data:[]},'similar-tablets':{title:'相似裸錠',data:[]},'rare-bulk':{title:'少用散裝',data:[]}}, modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:[] },
+  'bare-tablets': { title:'裸錠藥品', groups:{'common-bulk':{title:'常用散裝',data:COMMON_BULK_DATA},'similar-tablets':{title:'相似裸錠',data:[]},'rare-bulk':{title:'少用散裝',data:[]}}, modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:[] },
   'blister-pack': { title:'片裝藥品', modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:MATCH_DATA },
   'same-ingredient': { title:'同成分辨識', modes:[['coexisting-form','併存劑型'],['coexisting-dose','併存劑量']], data:[] }
 };
@@ -144,7 +231,7 @@ function renderMatchingQuestion(){
     prompt.className = 'match-question-label';
     prompt.textContent = '這是哪一種藥品？';
     const img = document.createElement('img');
-    img.src = new URL(item.image.split('/').pop(), drugImageBase).href;
+    img.src = new URL(item.image.replace(/^assets\/drugs\//, ''), drugImageBase).href;
     img.alt = '請辨識此藥品';
     img.className = 'medicine-photo medicine-photo-large';
     img.onerror = () => {
