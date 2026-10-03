@@ -111,8 +111,95 @@ const COMMON_BULK_DATA = [
   }
 ];
 
+const SIMILAR_TABLETS_DATA = [
+  {
+    "id": "similar-biperiden",
+    "name": "Biperiden",
+    "dose": "2 mg",
+    "indication": "帕金森氏症",
+    "image": "assets/drugs/similar-tablets/biperiden.jpeg"
+  },
+  {
+    "id": "similar-bumetanide",
+    "name": "Bumetanide",
+    "dose": "1 mg",
+    "indication": "水腫、高血壓等",
+    "image": "assets/drugs/similar-tablets/bumetanide.jpeg"
+  },
+  {
+    "id": "similar-dimenhydrinate",
+    "name": "Dimenhydrinate",
+    "dose": "50 mg",
+    "indication": "預防或緩解動暈症（暈車、暈船、暈機）引起之頭暈、噁心",
+    "image": "assets/drugs/similar-tablets/dimenhydrinate.jpeg"
+  },
+  {
+    "id": "similar-buclizine",
+    "name": "Buclizine",
+    "dose": "25 mg",
+    "indication": "暫時緩解過敏性鼻炎、過敏所引起之搔癢預防或緩解動暈症引起之頭暈、噁心、嘔吐、頭痛等症狀。",
+    "image": "assets/drugs/similar-tablets/buclizine.jpeg"
+  },
+  {
+    "id": "similar-digoxin",
+    "name": "Digoxin",
+    "dose": "0.25 mg",
+    "indication": "心衰竭、心搏過速等心臟疾病",
+    "image": "assets/drugs/similar-tablets/digoxin.jpg"
+  },
+  {
+    "id": "similar-midodrine",
+    "name": "Midodrine",
+    "dose": "2.5 mg",
+    "indication": "體質性血壓過低、直立性循環系統失調病後、手術後及產後之血壓過低",
+    "image": "assets/drugs/similar-tablets/midodrine.jpeg"
+  },
+  {
+    "id": "similar-pyridoxine",
+    "name": "Pyridoxine HCL",
+    "dose": "50 mg",
+    "indication": "維他命Ｂ６缺乏症妊娠引起之噁心、嘔吐、皮膚炎",
+    "image": "assets/drugs/similar-tablets/pyridoxine.jpeg"
+  },
+  {
+    "id": "similar-stoline",
+    "name": "Stoline",
+    "dose": "Oxethazaine 5 mg＋Aluminum 100 mg",
+    "indication": "急慢性胃炎、食道炎過敏性大腸症及消化性潰瘍等伴有的胃痛、腹痛",
+    "image": "assets/drugs/similar-tablets/stoline.jpg"
+  },
+  {
+    "id": "similar-sodium-bicarbonate",
+    "name": "Sodium Bicarbonate",
+    "dose": "300 mg",
+    "indication": "代謝性酸中毒之鹼化劑",
+    "image": "assets/drugs/similar-tablets/sodium-bicarbonate.jpeg"
+  },
+  {
+    "id": "similar-baclofen",
+    "name": "Baclofen",
+    "dose": "5 mg",
+    "indication": "肌肉痙攣, 肌肉拉傷等症狀",
+    "image": "assets/drugs/similar-tablets/baclofen.jpg"
+  },
+  {
+    "id": "similar-levothyroxine",
+    "name": "Levothyroxine",
+    "dose": "50 mcg",
+    "indication": "甲狀腺機能減退症",
+    "image": "assets/drugs/similar-tablets/levothyroxine.jpeg"
+  },
+  {
+    "id": "similar-aluminum-hydroxide",
+    "name": "Aluminum Hydroxide",
+    "dose": "324 mg",
+    "indication": "緩解胃部不適或灼熱感、或經診斷為胃及十二指腸潰瘍、胃炎、食道炎所伴隨之胃酸過多",
+    "image": "assets/drugs/similar-tablets/aluminum-hydroxide.jpeg"
+  }
+];
+
 const DRUG_CHAPTERS = {
-  'bare-tablets': { title:'裸錠藥品', groups:{'common-bulk':{title:'常用散裝',data:COMMON_BULK_DATA},'similar-tablets':{title:'相似裸錠',data:[]},'rare-bulk':{title:'少用散裝',data:[]}}, modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:[] },
+  'bare-tablets': { title:'裸錠藥品', groups:{'common-bulk':{title:'常用散裝',data:COMMON_BULK_DATA},'similar-tablets':{title:'相似裸錠',data:SIMILAR_TABLETS_DATA},'rare-bulk':{title:'少用散裝',data:[]}}, modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:[] },
   'blister-pack': { title:'片裝藥品', modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:MATCH_DATA },
   'same-ingredient': { title:'同成分辨識', modes:[['coexisting-form','併存劑型'],['coexisting-dose','併存劑量']], data:[] }
 };
