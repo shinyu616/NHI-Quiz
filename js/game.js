@@ -25,34 +25,47 @@ const MATCH_DATA = [
 ];
 
 const DRUG_CHAPTERS = {
-  'bare-tablets': { title:'裸錠藥品', modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:[] },
+  'bare-tablets': { title:'裸錠藥品', groups:{'common-bulk':{title:'常用散裝',data:[]},'similar-tablets':{title:'相似裸錠',data:[]},'rare-bulk':{title:'少用散裝',data:[]}}, modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:[] },
   'blister-pack': { title:'片裝藥品', modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:MATCH_DATA },
   'same-ingredient': { title:'同成分辨識', modes:[['coexisting-form','併存劑型'],['coexisting-dose','併存劑量']], data:[] }
 };
 
+function selectedDrugBank(chapterId, groupId){
+  const chapter = DRUG_CHAPTERS[chapterId];
+  return chapter && (chapter.groups ? chapter.groups[groupId] : chapter);
+}
+
 function matchingTitle(){
   const chapter = DRUG_CHAPTERS[matchState.chapter];
-  return chapter.title + '｜' + chapter.modes.find(([mode]) => mode === matchState.mode)[1];
+  return chapter.title + (chapter.groups ? '｜' + chapter.groups[matchState.group].title : '') + '｜' + chapter.modes.find(([mode]) => mode === matchState.mode)[1];
 }
 
 function updateDrugPractice(){
   const chapter = DRUG_CHAPTERS[$('drug-learning-chapter').value];
+  const isDrugLearning = $('learning-mode').value === 'drug-learning';
+  const needsGroup = !!(chapter && chapter.groups);
+  const bank = selectedDrugBank($('drug-learning-chapter').value, $('drug-learning-group').value);
+  $('drug-group-field').classList.toggle('hidden', !isDrugLearning || !needsGroup);
   const select = $('drug-learning-mode');
   select.innerHTML = '';
   const placeholder = document.createElement('option');
   placeholder.value = '';
-  placeholder.textContent = chapter ? '請選擇練習類型' : '請先選擇章節';
+  placeholder.textContent = bank ? '請選擇練習類型' : needsGroup ? '請先選擇分類' : '請先選擇章節';
   select.appendChild(placeholder);
-  if(chapter) chapter.modes.forEach(([value, title]) => {
+  if(bank) chapter.modes.forEach(([value, title]) => {
     const option = document.createElement('option');
     option.value = value;
     option.textContent = title;
     select.appendChild(option);
   });
-  $('drug-practice-field').classList.toggle('hidden', !chapter || $('learning-mode').value !== 'drug-learning');
-  $('start-error').textContent = chapter && !chapter.data.length ? chapter.title + '題庫尚未建置。' : '';
+  $('drug-practice-field').classList.toggle('hidden', !bank || !isDrugLearning);
+  $('start-error').textContent = isDrugLearning && bank && !bank.data.length ? bank.title + '題庫尚未建置。' : '';
 }
-$('drug-learning-chapter').addEventListener('change', updateDrugPractice);
+$('drug-learning-chapter').addEventListener('change', () => {
+  $('drug-learning-group').value = '';
+  updateDrugPractice();
+});
+$('drug-learning-group').addEventListener('change', updateDrugPractice);
 
 function show(name){ Object.entries(screens).forEach(([k,v]) => v.classList.toggle('hidden', k !== name)); }
 
@@ -63,13 +76,16 @@ $('start-btn').addEventListener('click', () => {
   const mode = learningMode === 'drug-learning' ? $('drug-learning-mode').value : learningMode;
   const topic = $('topic').value;
   const chapter = $('drug-learning-chapter').value;
+  const group = $('drug-learning-group').value;
+  const bank = selectedDrugBank(chapter, group);
   if(!cardNumber || !role || !learningMode){ $('start-error').textContent = '請輸入卡號，並選擇身分及學習模式。'; return; }
   if(learningMode === 'drug-learning' && !DRUG_CHAPTERS[chapter]){ $('start-error').textContent = '請選擇認識藥品章節。'; return; }
+  if(learningMode === 'drug-learning' && !bank){ $('start-error').textContent = '請選擇裸錠藥品分類。'; return; }
   if(learningMode === 'drug-learning' && !mode){ $('start-error').textContent = '請選擇認識藥品的練習類型。'; return; }
-  if(learningMode === 'drug-learning' && !DRUG_CHAPTERS[chapter].data.length){ $('start-error').textContent = DRUG_CHAPTERS[chapter].title + '題庫尚未建置，請選擇其他章節。'; return; }
+  if(learningMode === 'drug-learning' && !bank.data.length){ $('start-error').textContent = bank.title + '題庫尚未建置，請選擇其他章節。'; return; }
   if(mode === 'quiz' && (!topic || !QUESTION_BANK[topic])){ $('start-error').textContent = '請選擇學習主題。'; return; }
   $('start-error').textContent = '';
-  if(mode !== 'quiz'){ startMatching(mode, cardNumber, role, chapter); return; }
+  if(mode !== 'quiz'){ startMatching(mode, cardNumber, role, chapter, group); return; }
   state = { cardNumber, role, topic, index:0, score:0, answers:[], locked:false };
   $('learner-info').textContent = `卡號 ${maskCard(cardNumber)}｜${role}`;
   $('topic-title').textContent = QUESTION_BANK[topic].title;
@@ -85,13 +101,14 @@ $('learning-mode').addEventListener('change', (event) => {
   $('start-btn').textContent = isDrugLearning ? '開始練習' : '開始測驗';
 });
 
-function startMatching(mode, cardNumber, role, chapter){
+function startMatching(mode, cardNumber, role, chapter, group){
   matchState = {
     mode,
     chapter,
+    group,
     cardNumber,
     role,
-    questions: shuffle(DRUG_CHAPTERS[chapter].data).slice(0, 10),
+    questions: shuffle(selectedDrugBank(chapter, group).data).slice(0, 10),
     index: 0,
     score: 0,
     answers: [],
@@ -148,7 +165,7 @@ function renderMatchingQuestion(){
 
   const answerKey = matchState.mode === 'image-name' ? 'name' : matchState.mode === 'drug-dose' ? 'dose' : 'indication';
   // 圖片辨識優先放入相近藥品，選項一律取自目前題庫。
-  const candidates = DRUG_CHAPTERS[matchState.chapter].data.filter(other => other.id !== item.id);
+  const candidates = selectedDrugBank(matchState.chapter, matchState.group).data.filter(other => other.id !== item.id);
   const distractorItems = matchState.mode === 'image-name'
     ? [...shuffle(candidates.filter(other => other.indication === item.indication)),
        ...shuffle(candidates.filter(other => other.indication !== item.indication))]
@@ -164,7 +181,7 @@ function renderMatchingQuestion(){
   const pairedIds = ['xigduo-xr', 'galvus-met'];
   const pairedQuestion = matchState.mode === 'image-name' && pairedIds.includes(item.id);
   const pairedDistractors = pairedQuestion
-    ? DRUG_CHAPTERS[matchState.chapter].data.filter(other => pairedIds.includes(other.id) && other.id !== item.id)
+    ? selectedDrugBank(matchState.chapter, matchState.group).data.filter(other => pairedIds.includes(other.id) && other.id !== item.id)
     : [];
   const distractors = [...pairedDistractors, ...distractorItems.filter(other => matchState.mode !== 'image-name' || !pairedIds.includes(other.id))]
     .map(other => ({id:other.id, value:formatOptionValue(other[answerKey])}))
@@ -250,6 +267,7 @@ async function submitMatchingResult(total, pct){
     topic: matchingTitle(),
     chapter: DRUG_CHAPTERS[matchState.chapter].title,
     category: '認識藥品',
+    subgroup: DRUG_CHAPTERS[matchState.chapter].groups ? selectedDrugBank(matchState.chapter, matchState.group).title : '',
     score: pct,
     correct: matchState.score,
     total,
