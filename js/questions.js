@@ -250,10 +250,10 @@ const QUESTION_BANK = {
         explanation: "重大手術後5至7天仍不能經腸道進食者，可使用 Fat emulsion，原則上每日不超過一瓶。"
       },
       {
-        q: "Sodium glycerophosphate 用於成人時，給付規定最長使用多久？",
-        options: ["3日", "5日", "7日", "14日"],
-        answer: 2,
-        explanation: "Sodium glycerophosphate 用於成人以使用7日為限。"
+        q: "下列何者屬於活性維生素 D3 製劑（如 Alfacalcidol、Calcitriol）的健保給付使用對象？",
+        options: ["一般健康成人的營養補充", "副甲狀腺機能低下症病患", "單純疲勞且無相關疾病者", "所有停經後婦女，不論是否有骨折"],
+        answer: 1,
+        explanation: "副甲狀腺機能低下症屬於活性維生素 D3 製劑的健保給付使用對象，應檢附病歷影本。一般營養補充或單純疲勞不屬於此項給付對象；停經後婦女則須患有脊椎壓迫性骨折或髖骨骨折。"
       },
       {
         q: "下列何者符合 Mecobalamin 製劑的給付條件？",
@@ -318,10 +318,10 @@ const QUESTION_BANK = {
         explanation: "Oral calcium salt 可給付於骨質疏鬆或軟骨病等規定病患。"
       },
       {
-        q: "Nutrineal PD4 with 1.1% Amino Acid 每天最多使用幾袋？",
-        options: ["1袋", "2袋", "3袋", "4袋"],
-        answer: 0,
-        explanation: "Nutrineal PD4 with 1.1% Amino Acid 每天限使用1袋代替葡萄糖腹膜透析液。"
+        q: "使用肝庇護劑應檢附肝功能報告，該報告的有效期為多久？",
+        options: ["1個月", "1至2個月", "3至6個月", "12個月"],
+        answer: 2,
+        explanation: "使用肝庇護劑應檢附肝功能報告，該報告有效期為3至6個月，逾期應再複查。"
         }
   ]
   },
