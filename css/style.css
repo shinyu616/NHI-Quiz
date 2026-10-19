@@ -160,3 +160,31 @@ button{font-family:inherit;font-size:16px}.primary{margin-top:22px;width:100%;bo
   #match-screen .match-card{font-size:1rem;min-height:58px;padding:13px 14px}
   #match-screen .feedback{margin-top:14px}
 }
+
+/* 首頁欄位標題與填答內容的視覺層級 */
+#start-screen label{
+  color:#174b7a;
+  font-size:20px;
+  font-weight:700;
+  line-height:1.5;
+}
+#start-screen input,
+#start-screen select{
+  font-family:inherit;
+  font-size:16px;
+  font-weight:400;
+  color:#60758a;
+  line-height:1.5;
+}
+#start-screen input::placeholder{
+  color:#718096;
+  opacity:1;
+}
+#start-screen select option{
+  color:#60758a;
+  background:#fff;
+  font-weight:400;
+}
+#start-screen select option[value=""]{
+  color:#718096;
+}
