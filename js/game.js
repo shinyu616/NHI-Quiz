@@ -285,11 +285,136 @@ const RARE_BULK_DATA = [
   }
 ];
 
+const SAME_INGREDIENT_QUESTIONS = {
+  'coexisting-form': [
+    {"question":"請問Acetaminophen現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,3]},
+    {"question":"請問Acetylcysteine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Acyclovir現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,2]},
+    {"question":"請問Amoxicillin＋clavulanate現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,3]},
+    {"question":"請問Aripiprazole現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Atropine Sulfate現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,2]},
+    {"question":"請問Azithromycin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,3]},
+    {"question":"請問Biperiden現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Bisacodyl現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2]},
+    {"question":"請問Budesonide現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2]},
+    {"question":"請問Calcitriol現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Cefuroxime現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Cetirizine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,3]},
+    {"question":"請問Ciprofloxacin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Clindamycin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,2]},
+    {"question":"請問Cyproheptadine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,3]},
+    {"question":"請問Desmopressin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Dexamethasone現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,2]},
+    {"question":"請問Diazepam 現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Diclofenac現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2]},
+    {"question":"請問Digoxin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Domperidone現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,3]},
+    {"question":"請問Doxepin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2]},
+    {"question":"請問Erythromycin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2]},
+    {"question":"請問Famotidine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Fenoterol現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2]},
+    {"question":"請問Fentanyl現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,2]},
+    {"question":"請問Fluconazole現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Flupentixol現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Furosemide現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Fusidic acid現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2]},
+    {"question":"請問Gentamycin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,2]},
+    {"question":"請問Granisetron現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Haloperidol現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Hydrocortisone現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,2]},
+    {"question":"請問Labetalol現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Lacosamide現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Levetiracetam現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,3]},
+    {"question":"請問Levofloxacin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,2]},
+    {"question":"請問Lidocaine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,2]},
+    {"question":"請問Linezolid現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Lorazepam現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Mecobalamin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Mesalazine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2]},
+    {"question":"請問Metoclopramide現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Metronidazole現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,2]},
+    {"question":"請問Midazolam現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Moxifloxacin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Neostigmine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,2]},
+    {"question":"請問Nitroglycerin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Ofloxacin現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2]},
+    {"question":"請問Olanzapine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Paliperidone現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Pilocarpine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2]},
+    {"question":"請問Piracetam現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,3]},
+    {"question":"請問Potassium Chloride現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Prednisolone現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2,3]},
+    {"question":"請問Progesterone現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Quetiapine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2]},
+    {"question":"請問Risperidone現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,3]},
+    {"question":"請問Rivastigmine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[1,2,3]},
+    {"question":"請問Semaglutide現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Sodium Bicarbonate現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Torsemide現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Tramadol現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Tranexamic Acid現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
+    {"question":"請問Valproate現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,3]},
+    {"question":"請問Voriconazole現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]}
+  ],
+  'coexisting-dose': [
+    {"question":"請問(口)Acetylcysteine現存哪些劑量","options":["50mg","100mg","200mg","600mg"],"answers":[1,3]},
+    {"question":"請問(口)Afatinib dimaleate現存哪些劑量","options":["10mg","20mg","30mg","40mg"],"answers":[2,3]},
+    {"question":"請問(口)Apixaban現存哪些劑量","options":["1.25mg","2.5mg","3mg","5mg"],"answers":[1,3]},
+    {"question":"請問(口)Aripiprazole現存哪些劑量","options":["5mg","10mg","15mg","20mg"],"answers":[0,1]},
+    {"question":"請問(針)Ascorbic Acid現存哪些劑量","options":["500mg","1000mg","2000mg","5000mg"],"answers":[0,3]},
+    {"question":"請問(口)Atorvastatin現存哪些劑量","options":["5mg","10mg","20mg","40mg"],"answers":[1,2,3]},
+    {"question":"請問(口)Bisoprolol現存哪些劑量","options":["1.25mg","2.5mg","3mg","5mg"],"answers":[0,3]},
+    {"question":"請問(口)Cabozantinib現存哪些劑量","options":["5mg","10mg","20mg","40mg"],"answers":[2,3]},
+    {"question":"請問(口)Carvedilol現存哪些劑量","options":["6.25mg","15mg","20mg","25mg"],"answers":[0,3]},
+    {"question":"請問(口)Clozapine現存哪些劑量","options":["25mg","50mg","100mg","200mg"],"answers":[0,2]},
+    {"question":"請問(口)Dabigatran 現存哪些劑量","options":["100mg","110mg","120mg","150mg"],"answers":[1,3]},
+    {"question":"請問(針)Denosumab現存哪些劑量","options":["30mg","60mg","100mg","120mg"],"answers":[1,3]},
+    {"question":"請問(口)Dexamethasone現存哪些劑量","options":["0.5mg","2mg","4mg","5mg"],"answers":[0,2]},
+    {"question":"請問(口)Dextromethorphan現存哪些劑量","options":["30mg","60mg","100mg","120mg"],"answers":[0,1]},
+    {"question":"請問(口)Dipyridamole現存哪些劑量","options":["25mg","50mg","75mg","200mg"],"answers":[0,2]},
+    {"question":"請問(口)Donepezil現存哪些劑量","options":["5mg","10mg","20mg","40mg"],"answers":[0,1]},
+    {"question":"請問(針)Dopamine現存哪些劑量","options":["40mg","50mg","300mg","600mg"],"answers":[0,3]},
+    {"question":"請問(針)Emicizumab現存哪些劑量","options":["30mg","60mg","100mg","120mg"],"answers":[0,1]},
+    {"question":"請問(口)Empagliflozin現存哪些劑量","options":["5mg","10mg","25mg","100 mg"],"answers":[1,2]},
+    {"question":"請問(口)Edoxaban現存哪些劑量","options":["10mg","15mg","30mg","60mg"],"answers":[1,2,3]},
+    {"question":"請問(口)Entecavir現存哪些劑量","options":["0.5mg","1mg","2mg","5mg"],"answers":[0,1]},
+    {"question":"請問(口)Entresto現存哪些劑量","options":["25mg","50mg","100mg","200mg"],"answers":[2,3]},
+    {"question":"請問(口)Finasteride現存哪些劑量","options":["0.5mg","1mg","2mg","5mg"],"answers":[1,3]},
+    {"question":"請問(針)Haloperidol現存哪些劑量","options":["5mg","10mg","20mg","50mg"],"answers":[0,3]},
+    {"question":"請問(口)Herbesser現存哪些劑量","options":["10mg","20mg","30mg","60mg"],"answers":[2,3]},
+    {"question":"請問(口) Isosorbide 5-Mononitrtate現存哪些劑量","options":["10mg","20mg","30mg","60mg"],"answers":[1,3]},
+    {"question":"請問(針)Lenograstim現存哪些劑量","options":["50mcg","100mcg","200mcg","250mcg"],"answers":[1,3]},
+    {"question":"請問(口)Lenvatinib現存哪些劑量","options":["2mg","4mg","5mg","10mg"],"answers":[1,3]},
+    {"question":"請問(口)Nifedipine現存哪些劑量","options":["5mg","10mg","20mg","30mg"],"answers":[1,3]},
+    {"question":"請問(口)Olanzapine現存哪些劑量","options":["5mg","10mg","20mg","30mg"],"answers":[0,1]},
+    {"question":"請問(口)Oxycodone現存哪些劑量","options":["5mg","10mg","20mg","30mg"],"answers":[0,1]},
+    {"question":"請問(口)Paliperidone現存哪些劑量","options":["2mg","3mg","5mg","9mg"],"answers":[1,3]},
+    {"question":"請問(口)Pitavastatin現存哪些劑量","options":["2mg","4mg","5mg","10mg"],"answers":[0,1]},
+    {"question":"請問(口)Pramipexole現存哪些劑量","options":["0.25mg","0.375mg","0.75mg","1.5mg"],"answers":[0,1,2,3]},
+    {"question":"請問(口)Propranolol現存哪些劑量","options":["5mg","10mg","30 mg","40mg"],"answers":[1,3]},
+    {"question":"請問(口)Quetiapine現存哪些劑量","options":["25mg","50mg","100mg","200mg"],"answers":[0,3]},
+    {"question":"請問(針)Risperidone現存哪些劑量","options":["25mg","50mg","100mg","200mg"],"answers":[0,2]},
+    {"question":"請問(口)Rivaroxaban現存哪些劑量","options":["2.5mg","10mg","15 mg","20mg"],"answers":[0,1,2,3]},
+    {"question":"請問(口)Rivastigmine現存哪些劑量","options":["1.5mg","2mg","3 mg","4.5mg"],"answers":[0,3]},
+    {"question":"請問(口)Rivotril現存哪些劑量","options":["0.5mg","1mg","1.5 mg","2mg"],"answers":[0,3]},
+    {"question":"請問(口)Semaglutide現存哪些劑量","options":["2mg","3mg","7mg","14mg"],"answers":[1,2,3]},
+    {"question":"請問(口)Sildenafil現存哪些劑量","options":["20mg","30mg","50mg","100mg"],"answers":[0,2,3]},
+    {"question":"請問(口)Sulpiride現存哪些劑量","options":["20mg","50mg","100mg","200mg"],"answers":[1,3]},
+    {"question":"請問(針)Methylprednisolone現存哪些劑量","options":["20mg","40mg","100mg","500mg"],"answers":[1,3]},
+    {"question":"請問(口)Tamsulosin現存哪些劑量","options":["0.2mg","0.4mg","0.5 mg","2mg"],"answers":[0,1]},
+    {"question":"請問(口)Theophylline現存哪些劑量","options":["100mg","125mg","200mg","250mg"],"answers":[1,2,3]},
+    {"question":"請問(針)Tocilizumab現存哪些劑量","options":["80mg","160mg","162mg","200mg"],"answers":[0,2,3]},
+    {"question":"請問(口)Topiramate現存哪些劑量","options":["5mg","10mg","25mg","100 mg"],"answers":[2,3]},
+    {"question":"請問(口)Venlafaxine現存哪些劑量","options":["25mg","37.5mg","50mg","75mg"],"answers":[1,3]},
+    {"question":"請問(口)Verapamil現存哪些劑量","options":["5mg","25mg","40mg","240mg"],"answers":[2,3]}
+  ]
+};
+
 const DRUG_CHAPTERS = {
   'bare-tablets': { title:'裸錠藥品', groups:{'common-bulk':{title:'常用散裝',data:COMMON_BULK_DATA},'similar-tablets':{title:'相似裸錠',data:SIMILAR_TABLETS_DATA},'rare-bulk':{title:'少用散裝',data:RARE_BULK_DATA}}, modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:[] },
   'blister-pack': { title:'片裝藥品', modes:[['image-name','外觀辨識'],['drug-dose','劑量'],['drug-indication','適應症']], data:MATCH_DATA },
   'coexisting-brands': { title:'併存廠牌', modes:[['image-name','外觀辨識']], data:[] },
-  'same-ingredient': { title:'同成分辨識', modes:[['coexisting-form','併存劑型'],['coexisting-dose','併存劑量']], data:[] }
+  'same-ingredient': { title:'同成分辨識', modes:[['coexisting-form','併存劑型'],['coexisting-dose','劑量']], questionBanks:SAME_INGREDIENT_QUESTIONS }
 };
 
 function selectedDrugBank(chapterId, groupId){
@@ -321,7 +446,7 @@ function updateDrugPractice(){
     select.appendChild(option);
   });
   $('drug-practice-field').classList.toggle('hidden', !bank || !isDrugLearning);
-  $('start-error').textContent = isDrugLearning && bank && !bank.data.length ? bank.title + '題庫尚未建置。' : '';
+  $('start-error').textContent = isDrugLearning && bank && !(bank.questionBanks || bank.data.length) ? bank.title + '題庫尚未建置。' : '';
 }
 $('drug-learning-chapter').addEventListener('change', () => {
   $('drug-learning-group').value = '';
@@ -344,7 +469,7 @@ $('start-btn').addEventListener('click', () => {
   if(learningMode === 'drug-learning' && !DRUG_CHAPTERS[chapter]){ $('start-error').textContent = '請選擇認識藥品章節。'; return; }
   if(learningMode === 'drug-learning' && !bank){ $('start-error').textContent = '請選擇裸錠藥品分類。'; return; }
   if(learningMode === 'drug-learning' && !mode){ $('start-error').textContent = '請選擇認識藥品的練習類型。'; return; }
-  if(learningMode === 'drug-learning' && !bank.data.length){ $('start-error').textContent = bank.title + '題庫尚未建置，請選擇其他章節。'; return; }
+  if(learningMode === 'drug-learning' && !(bank.questionBanks ? bank.questionBanks[mode]?.length : bank.data.length)){ $('start-error').textContent = bank.title + '題庫尚未建置，請選擇其他章節。'; return; }
   if(mode === 'quiz' && (!topic || !QUESTION_BANK[topic])){ $('start-error').textContent = '請選擇學習主題。'; return; }
   $('start-error').textContent = '';
   if(mode !== 'quiz'){ startMatching(mode, cardNumber, role, chapter, group); return; }
@@ -364,13 +489,14 @@ $('learning-mode').addEventListener('change', (event) => {
 });
 
 function startMatching(mode, cardNumber, role, chapter, group){
+  const bank = selectedDrugBank(chapter, group);
   matchState = {
     mode,
     chapter,
     group,
     cardNumber,
     role,
-    questions: shuffle(selectedDrugBank(chapter, group).data).slice(0, 10),
+    questions: shuffle(bank.questionBanks ? bank.questionBanks[mode] : bank.data).slice(0, 10),
     index: 0,
     score: 0,
     answers: [],
@@ -400,6 +526,13 @@ function renderMatchingQuestion(){
 
   const questionCard = document.createElement('div');
   questionCard.className = 'match-question-card';
+
+  if(item.answers){
+    questionCard.textContent = item.question;
+    left.appendChild(questionCard);
+    renderMultipleAnswerOptions(item, right);
+    return;
+  }
 
   if(matchState.mode === 'image-name'){
     const prompt = document.createElement('div');
@@ -464,11 +597,45 @@ function renderMatchingQuestion(){
   });
 }
 
+function renderMultipleAnswerOptions(item, right){
+  $('match-feedback').textContent = '本題可複選。請勾選所有正確選項，再送出答案。';
+  const inputs = item.options.map((value, index) => {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.style.width = 'auto';
+    label.append(input, ' ' + value);
+    right.appendChild(label);
+    return input;
+  });
+
+  const submit = document.createElement('button');
+  submit.type = 'button';
+  submit.className = 'primary';
+  submit.textContent = '送出答案';
+  submit.disabled = true;
+  inputs.forEach(input => input.addEventListener('change', () => {
+    submit.disabled = !inputs.some(option => option.checked);
+  }));
+  submit.addEventListener('click', () => {
+    if(matchState.answered) return;
+    const selected = inputs.flatMap((input, index) => input.checked ? [index] : []);
+    const correct = selected.length === item.answers.length && selected.every(index => item.answers.includes(index));
+    inputs.forEach(input => { input.disabled = true; });
+    submit.disabled = true;
+    recordMatchingAnswer(
+      item.question,
+      selected.map(index => item.options[index]).join('、'),
+      item.answers.map(index => item.options[index]).join('、'),
+      correct
+    );
+  });
+  right.appendChild(submit);
+}
+
 function chooseMatchingAnswer(button, selectedAnswer, correctAnswer){
   if(matchState.answered) return;
-  matchState.answered = true;
   const correct = button.dataset.correct === 'true';
-  if(correct) matchState.score++;
 
   const item = matchState.questions[matchState.index];
   const question = matchState.mode === 'image-name'
@@ -476,19 +643,18 @@ function chooseMatchingAnswer(button, selectedAnswer, correctAnswer){
     : matchState.mode === 'drug-dose'
       ? `${item.name} 的正確劑量為何？`
       : `${item.name} 的適應症為何？`;
-  matchState.answers.push({
-    question,
-    selectedAnswer,
-    correctAnswer,
-    correct
-  });
-
   [...$('match-right').children].forEach(option => {
     option.disabled = true;
     if(option.dataset.correct === 'true') option.classList.add('matched');
   });
   if(!correct) button.classList.add('mismatch');
+  recordMatchingAnswer(question, selectedAnswer, correctAnswer, correct);
+}
 
+function recordMatchingAnswer(question, selectedAnswer, correctAnswer, correct){
+  matchState.answered = true;
+  if(correct) matchState.score++;
+  matchState.answers.push({question, selectedAnswer, correctAnswer, correct});
   $('match-feedback').className = `feedback ${correct ? 'good' : 'bad'}`;
   $('match-feedback').textContent = correct ? '答對了！' : `答錯了，正確答案是：${correctAnswer}`;
   $('match-next-btn').textContent = matchState.index === matchState.questions.length - 1 ? '查看結果' : '下一題';
