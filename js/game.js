@@ -287,6 +287,7 @@ const RARE_BULK_DATA = [
 
 const SAME_INGREDIENT_QUESTIONS = {
   'coexisting-form': [
+    {"question":"請問Ritodrine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
     {"question":"請問Acetaminophen現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,3]},
     {"question":"請問Acetylcysteine現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1]},
     {"question":"請問Acyclovir現存哪些劑型","options":["針劑","口服","外用","水劑"],"answers":[0,1,2]},
